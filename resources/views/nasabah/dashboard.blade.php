@@ -7,6 +7,7 @@
                <div class="flex flex-row items-center">
                   <img class="w-28 h-28 mx-4 shadow-lg rounded-full" src="/img/avatar.png" alt="Foto Avatar"/>
                   <div>
+                     <h6 class="mb-1 text-base font-medium text-gray-900 dark:text-white">Cabang Rungkut Mega</h6>
                      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
                      <p class="text-sm text-gray-500 dark:text-gray-400">3510000000000001</p>
                      <p class="text-sm text-gray-500 dark:text-gray-400">Jalan Kapas No 7, Desa Mawar, Kec Coklat, Kab Kucingan</p>
