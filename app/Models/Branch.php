@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
+
+    public function wastePrices()
+    {
+        return $this->hasMany(WastePrice::class);
+    }
 }

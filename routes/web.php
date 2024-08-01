@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WastePriceController;
 
 // Public
 Route::get('/', function () {
@@ -15,9 +16,7 @@ Route::get('/how-to-join-banksbima', function () {
     return view('howTo',['title'=>'How to Join - Banks BIMA']);
 });
 
-Route::get('/harga-sampah', function () {
-    return view('listHarga',['title'=>'Pricelist - Banks BIMA']);
-});
+Route::get('/harga-sampah', [WastePriceController::class, 'index'])->name('wasteprice.index');
 
 Route::get('/login', function () {
     return view('login',['title'=>'Login - Banks BIMA']);
