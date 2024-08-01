@@ -2,9 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Branch;
+use App\Models\District;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -16,29 +20,30 @@ class UserFactory extends Factory
      */
     protected static ?string $password;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = User::class;
+    
     public function definition(): array
     {
+        // Set default role_id
+        $roleId = Role::where('id', 1)->first()->id;
+        
+        // Randomly assign role_id 2 only 5 times
+        if (User::count() < 5 && $this->faker->boolean(20)) { // 20% chance to use role_id 2
+            $roleId = Role::where('id', 2)->first()->id;
+        }
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'role_id' => $roleId,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => bcrypt('password'), // Default password for all users
+            'id_number' => $this->faker->unique()->numerify('ID########'),
+            'name' => $this->faker->name,
+            'whatsapp' => $this->faker->phoneNumber,
+            'address' => $this->faker->address,
+            'district_id' => District::inRandomOrder()->first()->id,
+            'branch_id' => Branch::inRandomOrder()->first()->id,
+            'saldo' => $this->faker->numberBetween(1000000, 50000000),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
-    }
 }
