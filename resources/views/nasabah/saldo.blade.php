@@ -2,14 +2,14 @@
    <x-slot:title>{{ $title }}</x-slot:title>
    <div class="p-4 mt-14">
       <div class="grid grid-cols-3 gap-4 mb-4">
-         <div class="flex items-center col-span-1 justify-start w-full  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <a href="/saldo" class="p-6 w-full">
+         <div class="flex items-center col-span-1 justify-start w-full  bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="p-6 w-full">
                <h5 class="mb-2 text-2xl font-bold justify-start tracking-tight text-gray-900 dark:text-white">Saldo</h5>
                <div class="flex items-center justify-between">
                   <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">Rp</p>
                   <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">{{ auth()->user()->saldo}}</p>
                </div>
-            </a>
+            </div>
          </div>
          <div class="w-full col-span-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between p-6">

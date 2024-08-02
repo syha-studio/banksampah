@@ -108,21 +108,27 @@
             </div>
             <div class="flow-root">
                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                  <li class="py-3 sm:py-4">
-                     <div class="flex items-center">
-                        <div class="flex-1 min-w-0 ms-4">
-                           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                              Tanggal 20-07-2024
-                           </p>
-                           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                              Kaca, Plastik, Besi
-                           </p>
+                  @forelse ($pickupHistories as $pickupHistory)
+                     <li class="py-3 sm:py-4">
+                        <div class="flex items-center">
+                           <div class="flex-1 min-w-0 ms-4">
+                              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                 Setoran Tanggal {{ $pickupHistory->updated_at->format('d-m-Y')}}
+                              </p>
+                              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                 {{ $pickupHistory->status->name }}
+                              </p>
+                           </div>
+                           <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              Rp {{ $pickupHistory->total }}
+                           </div>
                         </div>
-                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                           Rp 24.000
-                        </div>
-                     </div>
-                  </li>
+                     </li>
+                  @empty
+                     <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
+                        Tidak ada Riwayat Setoran
+                  </div>
+                  @endforelse
                </ul>
             </div>
          </div>
@@ -137,21 +143,27 @@
             </div>
             <div class="flow-root">
                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                  <li class="py-3 sm:py-4">
-                     <div class="flex items-center">
-                        <div class="flex-1 min-w-0 ms-4">
-                           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                              Tanggal 20-07-2024
-                           </p>
-                           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                              Pukul 22.39
-                           </p>
+                  @forelse ($withdraws as $withdraw)
+                     <li class="py-3 sm:py-4">
+                        <div class="flex items-center">
+                           <div class="flex-1 min-w-0 ms-4">
+                              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                 Penarikan Tanggal {{ $withdraw->updated_at->format('d-m-Y')}}
+                              </p>
+                              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                 {{ $withdraw->status->name }}
+                              </p>
+                           </div>
+                           <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              Rp {{ $withdraw->total }}
+                           </div>
                         </div>
-                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                           Rp 24.000
-                        </div>
-                     </div>
-                  </li>
+                     </li>
+                  @empty
+                     <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
+                        Tidak ada Permintaan Aktif
+                  </div>
+                  @endforelse
                </ul>
             </div>
          </div>

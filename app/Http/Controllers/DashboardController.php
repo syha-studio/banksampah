@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pickup;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,14 @@ class DashboardController extends Controller
     {
         
         $pickup = Pickup::where('user_id',auth()->user()->id)->whereIn('status_id', [1, 2, 4])->get();
+        $pickupHistory = Pickup::where('user_id',auth()->user()->id)->whereIn('status_id', [5, 7, 8])->limit(3)->get();
+        $withdraw = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [6, 7, 9])->limit(3)->get();
         // return $pickup;
         return view('nasabah.dashboard',[
             'title' => 'Dashboard',
-            'pickups' => $pickup
+            'pickups' => $pickup,
+            'pickupHistories' => $pickupHistory,
+            'withdraws' => $withdraw
         ]);
     }
 
