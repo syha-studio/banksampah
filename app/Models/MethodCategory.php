@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MethodCategory extends Model
 {
     use HasFactory;
+
+    public function method()
+    {
+        return $this->hasMany(Method::class);
+    }
+
 }

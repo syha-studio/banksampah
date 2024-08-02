@@ -13,4 +13,9 @@ class Withdraw extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function method()
+    {
+        return $this->belongsTo(Method::class);
+    }
 }

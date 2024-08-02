@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Method extends Model
 {
     use HasFactory;
+
+    public function methodCategory()
+    {
+        return $this->belongsTo(MethodCategory::class);
+    }
+
+    public function withdraw()
+    {
+        return $this->hasMany(Withdraw::class);
+    }
+
 }

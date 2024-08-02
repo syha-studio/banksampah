@@ -39,30 +39,65 @@
          </div>
      </div>
       </div>
-      <div class="w-full mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-         <div class="flex items-center justify-between mb-4">
-            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-               Riwayat Tarik Tunai
+      <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+         <div class="flex items-center justify-center mb-4">
+            <h5 class="text-xl pb-4 font-bold leading-none text-center text-gray-900 dark:text-white">
+               Riwayat Penarikan
             </h5>
          </div>
          <div class="flow-root">
-            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-               <li class="py-3 sm:py-4">
-                  <div class="flex items-center">
-                     <div class="flex-1 min-w-0 ms-4">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                           Tanggal 20-07-2024
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                           Pukul 22.39
-                        </p>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                   <tr>
+                       <th scope="col" class="px-6 py-3">
+                           Tanggal
+                       </th>
+                       <th scope="col" class="px-6 py-3">
+                           Metode
+                       </th>
+                       <th scope="col" class="px-6 py-3">
+                           Bank/E-wallet
+                       </th>
+                       <th scope="col" class="px-6 py-3">
+                           Total (Rp)
+                       </th>
+                       <th scope="col" class="px-6 py-3">
+                        Status
+                        </th>
+                       <th scope="col" class="px-6 py-3 text-right">
+                           Detail
+                       </th>
+                   </tr>
+               </thead>
+               <tbody>
+                  @forelse ($withdraws as $withdraw)
+                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                           {{ $withdraw->updated_at->format('d-m-Y') }}
+                        </th>
+                        <td class="px-6 py-4">
+                           {{ $withdraw->method->methodCategory->name }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $withdraw->method->name }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $withdraw->total }}
+                        </td>
+                        <td class="px-6 py-4">
+                           {{ $withdraw->status->name }}
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                           <a data-modal-target="detail-withdraw" data-modal-toggle="detail-withdraw" class="font-medium text-design-primary hover:underline">See Details</a>
+                        </td>
+                  </tr>
+                  @empty
+                     <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
+                        Tidak ada Riwayat Penarikan
                      </div>
-                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        Rp 24.000
-                     </div>
-                  </div>
-               </li>
-            </ul>
+                  @endforelse
+               </tbody>
+           </table>
          </div>
       </div>
    </div>

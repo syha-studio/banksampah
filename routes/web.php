@@ -3,6 +3,7 @@
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WastePriceController;
@@ -32,24 +33,21 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 
-// Nasabah
+// Nasabah - Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard')->middleware('auth');
 Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
 Route::post('/pickup-request', [DashboardController::class, 'create'])->name('pickup.request');
 Route::post('/profile', [DashboardController::class, 'update'])->name('profile.update');
 
-Route::get('/profile-edit', function () {
-    return view('nasabah.profileEdit', ['title' => 'Edit Profile - Banks BIMA']);
-})->middleware('auth');
+// Nasabah - Saldo
+Route::get('/saldo', [SaldoController::class, 'index'])->name('nasabah.saldo')->middleware('auth');
 
+// Nasabah - History
 Route::get('/history', function () {
     return view('nasabah.pickUpHistory', ['title' => 'History - Banks BIMA']);
 })->middleware('auth');
 
-Route::get('/saldo', function () {
-    return view('nasabah.saldo', ['title' => 'Saldo - Banks BIMA']);
-})->middleware('auth');
-
+// Nasabah - Shop
 Route::get('/shop', function () {
     return view('nasabah.shop', ['title' => 'Shop - Banks BIMA']);
 })->middleware('auth');
