@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('branch_id')->constrained();
             $table->foreignId('method_id')->constrained();
             $table->string('account_number');
             $table->bigInteger('total');

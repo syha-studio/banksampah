@@ -11,6 +11,16 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function pickup()
+    {
+        return $this->hasMany(Pickup::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

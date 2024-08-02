@@ -23,7 +23,6 @@ class WithdrawFactory extends Factory
 
         return [
             'user_id' => User::inRandomOrder()->first()->id,
-            'branch_id' => Branch::inRandomOrder()->first()->id,
             'method_id' => Method::inRandomOrder()->first()->id,
             'account_number' => $this->faker->bankAccountNumber,
             'total' => $this->faker->numberBetween(10000, 1000000),

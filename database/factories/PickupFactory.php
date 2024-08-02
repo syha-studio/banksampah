@@ -22,8 +22,7 @@ class PickupFactory extends Factory
 
         return [
             'user_id' => User::inRandomOrder()->first()->id,
-            'branch_id' => Branch::inRandomOrder()->first()->id,
-            'date' => $this->faker->date(),
+            'pickup_date' => $this->faker->date(),
             'total' => $this->faker->numberBetween(10000, 100000),
             'image_id' => Image::inRandomOrder()->first()->id,
             'status_id' => $this->faker->randomElement($statusIds),

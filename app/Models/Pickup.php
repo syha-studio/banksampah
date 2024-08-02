@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Pickup extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'status_id',
+        'total',
+        'date',
+        'image_id'
+    ];
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

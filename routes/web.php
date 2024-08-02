@@ -33,7 +33,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 
 // Nasabah
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard')->middleware('auth');
+Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
+Route::post('/pickup-request', [DashboardController::class, 'create'])->name('pickup.request');
 
 Route::get('/profile-edit', function () {
     return view('nasabah.profileEdit', ['title' => 'Edit Profile - Banks BIMA']);

@@ -7,7 +7,7 @@
                <h5 class="mb-2 text-2xl font-bold justify-start tracking-tight text-gray-900 dark:text-white">Saldo</h5>
                <div class="flex items-center justify-between">
                   <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">Rp</p>
-                  <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">50.000</p>
+                  <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">{{ auth()->user()->saldo}}</p>
                </div>
             </a>
          </div>

@@ -15,4 +15,9 @@ class Branch extends Model
     {
         return $this->hasMany(WastePrice::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }
