@@ -5,7 +5,7 @@
          <div class="w-full col-span-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between p-6">
                <div class="flex flex-row items-center">
-                  <img class="w-28 h-28 mx-4 shadow-lg rounded-full" src="/img/avatar.png" alt="Foto Avatar"/>
+                  <img class="w-28 h-28 mx-4 shadow-lg rounded-full" src="/img/avatar-default.png" alt="Foto Avatar"/>
                   <div>
                      <h6 class="mb-1 text-base font-medium text-gray-900 dark:text-white">Cabang Rungkut Mega</h6>
                      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>

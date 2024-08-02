@@ -18,16 +18,43 @@
           </div>
         </div>
       </div>
-      <div class="hidden md:block">
-        <a href="/login" class="flex items-center">
-          <button class="flex items-center bg-design-primary hover:bg-green-200 text-design-secondary font-bold py-2 px-4 rounded-md">
-            Login
-            <svg class="ml-2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
-            </svg>
+      @auth
+        <div class="hidden md:block">
+          <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 rounded-full" src="/img/avatar-default.png" alt="user photo">
           </button>
-        </a>
-      </div>
+          <!-- Dropdown menu -->
+          <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-56 dark:bg-gray-700 dark:divide-gray-600">
+              <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                <div>{{ auth()->user()->name }}</div>
+                <div class="font-medium truncate">{{ auth()->user()->email }}</div>
+              </div>
+              <div class="py-2">
+                <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+              </div>
+              <div class="py-2 w-full">
+                <form action="/logout" method="post">
+                  @csrf
+                  <div class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                    <button type="submit" >Log Out</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+      @else
+        <div class="hidden md:block">
+          <a href="/login" class="flex items-center">
+            <button class="flex items-center bg-design-primary hover:bg-green-200 text-design-secondary font-bold py-2 px-4 rounded-md">
+              Login
+              <svg class="ml-2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+              </svg>
+            </button>
+          </a>
+        </div>
+      @endauth
       <div class="-mr-2 flex md:hidden">
         <!-- Mobile menu button -->
         <button type="button" @click="isOpen = !isOpen" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
@@ -53,51 +80,35 @@
       <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
       <x-nav-link href="/how-to-join-banksbima" :active="request()->is('how-to-join-banksbima')">How To Join</x-nav-link>
       <x-nav-link href="/harga-sampah" :active="request()->is('harga-sampah')">Pricelist</x-nav-link>
-    </div>
-    @auth
-    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-      <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-        <span class="absolute -inset-1.5"></span>
-        <span class="sr-only">View notifications</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-        </svg>
-      </button>
-      <!-- Profile dropdown -->
-      <div class="relative ml-3">
-        <div>
-          <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">Open user menu</span>
-            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          </button>
+      @auth
+      <div>
+        <div class="text-design-white bg-gray-700 hover:text-design-white block rounded-md px-3 py-2 text-sm font-medium">
+          <div>{{ auth()->user()->name }}</div>
+          <div class="font-medium truncate">{{ auth()->user()->email }}</div>
         </div>
-
-        <!--
-          Dropdown menu, show/hide based on menu state.
-
-          Entering: "transition ease-out duration-100"
-            From: "transform opacity-0 scale-95"
-            To: "transform opacity-100 scale-100"
-          Leaving: "transition ease-in duration-75"
-            From: "transform opacity-100 scale-100"
-            To: "transform opacity-0 scale-95"
-        -->
-        <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-          <!-- Active: "bg-gray-100", Not Active: "" -->
-          <a href="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-          <a href="/" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+        <div class="my-2 text-design-white hover:bg-gray-500 hover:text-design-white block rounded-md px-3 py-2 text-sm font-medium">
+          <a href="/dashboard">Dashboard</a>
+        </div>
+        <div class="mb-2 w-full">
+          <form action="/logout" method="post">
+            @csrf
+            <div class="text-design-white hover:bg-gray-500 hover:text-design-white block rounded-md px-3 py-2 text-sm font-medium">
+              <button type="submit" class="w-full text-start">Log Out</button>
+            </div>
+          </form>
         </div>
       </div>
-    @elseguest
+    @else
       <a href="/login" class="flex items-center">
-        <button class="flex items-center bg-design-primary hover:bg-green-200 text-design-secondary font-bold py-2 px-4 rounded-md">
+        <button class="w-full flex items-center bg-design-primary hover:bg-green-200 text-design-secondary font-bold py-2 px-4 rounded-md">
           Login
           <svg class="ml-2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
           </svg>
         </button>
       </a>
-    @endguest
+    @endauth
+    </div>
+    
   </div>
 </nav>

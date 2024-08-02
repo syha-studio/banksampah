@@ -56,8 +56,6 @@ class RegisterController extends Controller
             'saldo' => 'required'
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
-
         User::create([
             'role_id' => $validatedData['role_id'],
             'email' => $validatedData['email'],
@@ -71,8 +69,6 @@ class RegisterController extends Controller
             'saldo' => $validatedData['saldo']
         ]);
 
-        $request->session()->flash('success', 'Pendaftaran Berhasil!');
-
-        return redirect('/login');
+        return redirect('/login')->with('success', 'Pendaftaran Berhasil!');
     }
 }
