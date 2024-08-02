@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('whatsapp');
             $table->string('address');
             $table->foreignId('district_id')->constrained();
-            $table->foreignId('branch_id')->constrained();
-            $table->bigInteger('saldo');
+            $table->foreignId('branch_id')->constrained()->default(1);
+            $table->bigInteger('saldo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

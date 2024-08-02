@@ -13,57 +13,28 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-design-secondary md:text-2xl dark:text-white">
                         Daftar Menjadi Nasabah
                     </h1>
-                    <form class="space-y-4 md:space-y-4" action="#">
+                    <form class="space-y-4 md:space-y-4" action="/register-2" method="post">
+                        @csrf
                         <div class="pt-6 text-center">
                             <h4 class="font-semibold ">Data Diri</h4>
                         </div>
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Email</label>
-                            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Email" required="">
-                        </div>
-                        <div>
-                            <label for="no-ktp" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Nomor KTP</label>
-                            <input type="text" id="no-ktp" placeholder="Masukkan Nomor KTP" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="nama-lengkap" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Nama Lengkap</label>
-                            <input type="text" id="nama-lengkap" placeholder="Masukkan Nama Lengkap" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="no-wa" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Nomor WhatsApp</label>
-                            <input type="text" id="no-wa" placeholder="Masukkan Nomor WhatsApp" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
+                        <input type="hidden" name="role_id" id="role_id" value="1">
+                        <input type="hidden" name="branch_id" id="branch_id" value="1">
+                        <input type="hidden" name="saldo" id="saldo" value="0">
+                        <x-form-input type="email" name="email" id="email" label="Email" placeholder="Masukkan Email"/>
+                        <x-form-input type="text" name="id_number" id="id_number" label="Nomor KTP" placeholder="Masukkan Nomor KTP"/>
+                        <x-form-input type="text" name="name" id="name" label="Nama Lengkap" placeholder="Masukkan Nama Lengkap"/>
+                        <x-form-input type="text" name="whatsapp" id="whatsapp" label="Nomor WhatsApp" placeholder="Masukkan Nomor WhatsApp"/>
                         <div class="pt-6 text-center">
                             <h4 class="font-semibold ">Alamat Nasabah</h4>
                         </div>
-                        <label for="kota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kota</label>
-                        <select id="kota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-design-primary dark:focus:border-design-primary">
-                            <option>Pilih Kota</option>
-                            <option>Surabaya</option>
-                            <option>Sidoarjo</option>
-                            <option>Gresik</option>
-                        </select>
-                        <label for="kecamatan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
-                        <select id="kecamatan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-design-primary dark:focus:border-design-primary">
-                            <option>Pilih Kecamatan</option>
-                            <option>Rungkut</option>
-                            <option>Driyorejo</option>
-                        </select>
-                        <div>
-                            <label for="alamat" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Alamat Lengkap</label>
-                            <input type="text" id="alamat" placeholder="Jalan, Nomor Rumah, Desa" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div>
+                        <x-form-select name="district_id" id="district_id" label="Kecamatan" placeholder="Pilih Kecamatan" :options="$districts"/>
+                        <x-form-input type="text" name="address" id="address" label="Alamat" placeholder="Masukkan Jalan, No Rumah, Desa"/>
                         <div class="pt-6 text-center">
                             <h4 class="font-semibold ">Buat Password</h4>
                         </div>
-                        <div>
-                            <label for="password" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        </div>
-                        <div>
-                            <label for="confirm-password" class="block mb-2 text-sm font-medium text-design-secondary dark:text-white">Confirm password</label>
-                            <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-design-secondary text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                        </div>
+                        <x-form-input type="password" name="password" id="password" label="Password" placeholder="••••••••"/>
+                        <x-form-input type="password" name="password_confirmation" id="password_confirmation" label="Konfirmasi Password" placeholder="••••••••"/>
                         <div class="flex items-start">
                             <div class="flex items-center h-5">
                               <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-design-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-design-primary dark:ring-offset-gray-800" required="">
@@ -73,9 +44,6 @@
                             </div>
                         </div>
                         <button type="submit" class="w-full text-white bg-design-primary hover:bg-green-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-design-primary dark:hover:bg-primary-700 dark:focus:ring-primary-800">Daftar Sekarang</button>
-                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Sudah Punya Akun? <a href="/login" class="font-medium text-design-primary hover:underline dark:text-primary-500">Masuk</a>
-                        </p>
                     </form>
                 </div>
             </div>
