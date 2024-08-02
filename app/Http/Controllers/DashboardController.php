@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pickup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,9 +39,24 @@ class DashboardController extends Controller
         $pickup = new Pickup();
         $pickup->user_id = $request->user_id;
         $pickup->status_id = 1; // Initial status
-        $pickup->status_id = 1;
         $pickup->save();
 
         return redirect()->back()->with('success', 'Permintaan pengambilan berhasil dibuat.');
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|max:255',
+            'id_number' => 'required|digits:16',
+            'whatsapp' => 'required|numeric',
+            'address' => 'required|max:255',
+        ]);
+    
+        $user = User::findOrFail(auth()->id());
+        
+        $user->update($data);
+
+        return redirect()->back()->with('success', 'Profil Berhasil diubah.');
     }
 }

@@ -14,33 +14,30 @@
                </button>
            </div>
            <!-- Modal body -->
-           <form action="#">
-               <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                  <div class="sm:col-span-2">
-                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cabang</label>
-                     <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" placeholder="Rungkut Mega" required="">
-                  </div>
-                   <div class="sm:col-span-2">
-                       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                       <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" placeholder="Bonnie Green" required="">
-                   </div>
-                   <div>
-                       <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor NIK</label>
-                       <input type="text" name="brand" id="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" placeholder="3510000000000001" required="">
-                   </div>
-                   <div>
-                       <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor HP</label>
-                       <input type="text"  name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" placeholder="087123456789" required="">
-                   </div>
-                   <div class="sm:col-span-2">
-                       <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                       <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-design-primary focus:border-design-primary" placeholder="Write product description here">Jalan Kapas No 7, Desa Mawar, Kec Coklat, Kab Kucingan</textarea>                    
-                   </div>
-               </div>
-               <button type="submit" class="text-white inline-flex items-center bg-design-primary hover:bg-green-200 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                   Ubah
-               </button>
-           </form>
+           <form action="{{ route('profile.update') }}" method="POST">
+                @csrf
+                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                        <input type="text" name="name" id="name" value="{{ auth()->user()->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" required="">
+                    </div>
+                    <div>
+                        <label for="id_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor NIK</label>
+                        <input type="text" name="id_number" id="id_number" value="{{ auth()->user()->id_number }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" required="">
+                    </div>
+                    <div>
+                        <label for="whatsapp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor HP</label>
+                        <input type="text" name="whatsapp" id="whatsapp" value="{{ auth()->user()->whatsapp }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" required="">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
+                        <textarea id="address" name="address" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-design-primary focus:border-design-primary" required="">{{ auth()->user()->address }}</textarea>
+                    </div>
+                </div>
+                <button type="submit" class="text-white inline-flex items-center bg-design-primary hover:bg-green-200 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Ubah
+                </button>
+            </form>
        </div>
    </div>
 </div>
