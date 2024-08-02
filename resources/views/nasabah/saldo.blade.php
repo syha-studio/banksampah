@@ -103,4 +103,5 @@
    </div>
   @include("nasabah.transferBank")
   @include("nasabah.transferEwallet")
+  @include("nasabah.detailWithdraw")
 </x-layout-nasabah>

@@ -33,7 +33,7 @@
                         <input type="text"  name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5" placeholder="50.000" required="">
                     </div>
                     <div class="sm:col-span-2">
-                        <p class="text-xs text-end">*Biaya Transfer Rp 2.500</p>
+                        <p class="text-xs text-end">*Biaya Transfer Rp 2.500 kecuali BCA</p>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesan</label>
