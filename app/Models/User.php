@@ -21,6 +21,11 @@ class User extends Authenticatable
         return $this->hasMany(Pickup::class);
     }
 
+    public function withdraw()
+    {
+        return $this->hasMany(Withdraw::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

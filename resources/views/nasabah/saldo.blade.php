@@ -88,9 +88,10 @@
                            {{ $withdraw->status->name }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                           <a data-modal-target="detail-withdraw" data-modal-toggle="detail-withdraw" class="font-medium text-design-primary hover:underline">See Details</a>
+                           <a type="button" data-modal-target="detail-withdraw{{ $withdraw->id }}" data-modal-toggle="detail-withdraw{{ $withdraw->id }}" class="font-medium text-design-primary hover:underline">See Details</a>
                         </td>
                   </tr>
+                  @include("nasabah.detailWithdraw")
                   @empty
                      <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
                         Tidak ada Riwayat Penarikan
@@ -103,5 +104,4 @@
    </div>
   @include("nasabah.transferBank")
   @include("nasabah.transferEwallet")
-  @include("nasabah.detailWithdraw")
 </x-layout-nasabah>

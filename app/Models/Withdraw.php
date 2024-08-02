@@ -14,8 +14,18 @@ class Withdraw extends Model
         return $this->belongsTo(Status::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function method()
     {
         return $this->belongsTo(Method::class);
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 }

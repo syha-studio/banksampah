@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('method_id')->constrained();
-            $table->string('account_number');
+            $table->string('account_number')->nullable()->default(null);
             $table->bigInteger('total');
-            $table->string('message');
-            $table->foreignId('image_id')->constrained();
+            $table->string('message')->nullable()->default(null);
+            $table->foreignId('image_id')->constrained()->nullable()->default(null);
             $table->foreignId('status_id')->constrained();
             $table->timestamps();
         });
