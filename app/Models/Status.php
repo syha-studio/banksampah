@@ -16,6 +16,6 @@ class Status extends Model
 
     public function withdraw()
     {
-        return $this->hasMany(Pickup::class);
+        return $this->hasMany(Withdraw::class);
     }
 }

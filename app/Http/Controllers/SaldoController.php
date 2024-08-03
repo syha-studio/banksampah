@@ -10,7 +10,7 @@ class SaldoController extends Controller
 {
     public function index()
     {
-        $withdraw = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [6, 7, 9])->paginate(10);
+        $withdraw = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [6, 7, 9])->orderBy('created_at', 'desc')->paginate(10);
         $withdrawActive = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [1, 2, 4])->get();
         $BankMethodOptions = Method::where('method_category_id', 1)->get();
         $ewalletMethodOptions = Method::where('method_category_id', 2)->get();

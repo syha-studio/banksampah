@@ -17,13 +17,19 @@ class Pickup extends Model
         'image_id'
     ];
 
-    public function status()
+    public function pickupDetail()
     {
-        return $this->belongsTo(Status::class);
+        return $this->hasMany(PickupDetail::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
 }

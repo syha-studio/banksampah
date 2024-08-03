@@ -4,6 +4,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\PickupController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WastePriceController;
@@ -45,9 +46,7 @@ Route::get('/saldo', [SaldoController::class, 'index'])->name('nasabah.saldo')->
 Route::post('/transfer', [SaldoController::class, 'create'])->name('withdraw.request');
 
 // Nasabah - History
-Route::get('/history', function () {
-    return view('nasabah.pickUpHistory', ['title' => 'History - Banks BIMA']);
-})->middleware('auth');
+Route::get('/history', [PickupController::class, 'index'])->name('nasabah.history')->middleware('auth');
 
 // Nasabah - Shop
 Route::get('/shop', function () {

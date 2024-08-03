@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
     use HasFactory;
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function branch()
+    {
+        return $this->hasMany(Branch::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

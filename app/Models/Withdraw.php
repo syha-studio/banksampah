@@ -11,11 +11,6 @@ class Withdraw extends Model
 
     protected $guarded = ['id'];
 
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,4 +25,10 @@ class Withdraw extends Model
     {
         return $this->belongsTo(Image::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
 }

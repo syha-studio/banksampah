@@ -11,11 +11,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
-
     public function pickup()
     {
         return $this->hasMany(Pickup::class);
@@ -24,6 +19,21 @@ class User extends Authenticatable
     public function withdraw()
     {
         return $this->hasMany(Withdraw::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+    
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     /**

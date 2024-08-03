@@ -113,10 +113,13 @@
                            {{ $withdraw->status->name }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                           <a type="button" data-modal-target="detail-withdraw{{ $withdraw->id }}" data-modal-toggle="detail-withdraw{{ $withdraw->id }}" class="font-medium text-design-primary hover:underline">See Details</a>
+                           @if ($withdraw->status->id == 6)
+                              <a type="button" data-modal-target="detail-withdraw{{ $withdraw->id }}" data-modal-toggle="detail-withdraw{{ $withdraw->id }}" class="font-medium text-design-primary hover:underline">See Details</a>
+                           @else
+                              <a class="font-medium text-gray-400">See Details</a>
+                           @endif
                         </td>
                   </tr>
-                  @include("nasabah.detailWithdraw")
                   @empty
                      <tr class="border-b dark:border-gray-700">
                         <td class="px-4 py-10 text-center" colspan="6">Tidak Ada Riwayat Penarikan</td>
@@ -127,6 +130,12 @@
          </div>
       </div>
    </div>
+   @foreach ($withdraws as $withdraw)
+      @if ($withdraw->status->id == 6)
+         @include("nasabah.detailWithdraw")
+      @endif
+   @endforeach
+   
   @include("nasabah.transferBank")
   @include("nasabah.transferEwallet")
 </x-layout-nasabah>

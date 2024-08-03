@@ -11,6 +11,11 @@ class WastePrice extends Model
 
     protected $fillable = ['branch_id', 'waste_id', 'price'];
 
+    public function pickupDetail()
+    {
+        return $this->hasMany(pickupDetail::class);
+    }
+
     public function branch()
     {
         return $this->belongsTo(Branch::class);

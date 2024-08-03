@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class PickupDetail extends Model
 {
     use HasFactory;
+
+    public function wastePrice()
+    {
+        return $this->belongsTo(WastePrice::class);
+    }
+
+    public function pickup()
+    {
+        return $this->belongsTo(Pickup::class);
+    }
+
 }

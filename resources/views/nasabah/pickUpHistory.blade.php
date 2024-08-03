@@ -15,7 +15,7 @@
                            Tanggal
                        </th>
                        <th scope="col" class="px-6 py-3">
-                           Jenis Sampah
+                           Status
                        </th>
                        <th scope="col" class="px-6 py-3">
                            Total (Rp)
@@ -26,34 +26,43 @@
                    </tr>
                </thead>
                <tbody>
-                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                           27/07/2024
-                       </th>
-                       <td class="px-6 py-4">
-                           Kaca, Botol Plastik
-                       </td>
-                       <td class="px-6 py-4">
-                           25.000
-                       </td>
-                       <td class="px-6 py-4 text-right">
-                           <a data-modal-target="detail-history" data-modal-toggle="detail-history" class="font-medium text-design-primary hover:underline">See Details</a>
-                       </td>
-                   </tr>
+                   @forelse ($pickupHistories as $pickupHistory)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                @if ($pickupHistory->pickup_date)
+                                    {{ $pickupHistory->pickup_date }}
+                                @else
+                                    {{ $pickupHistory->created_at->format('Y-m-d') }}
+                                @endif
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $pickupHistory->status->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $pickupHistory->total }}
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                @if ($pickupHistory->status->id == 5)
+                                    <a data-modal-target="detail-history{{ $pickupHistory->id }}" data-modal-toggle="detail-history{{ $pickupHistory->id }}" class="font-medium text-design-primary hover:underline cursor-pointer">See Details</a>
+                                @else
+                                <a class="font-medium text-gray-400">See Details</a>
+                                @endif
+                            </td>
+                        </tr>
+                   @empty
+                        <tr class="border-b dark:border-gray-700">
+                            <td class="px-4 py-10 text-center" colspan="6">Tidak Ada Riwayat Setoran</td>
+                        </tr>
+                   @endforelse
                </tbody>
            </table>
          </div>
       </div>
    </div>
-   <div class="fixed end-6 bottom-6">
-      <!-- Button modal -->
-      <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="flex items-center justify-center text-white bg-design-primary rounded-lg w-14 h-14 hover:bg-green-200 focus:ring-4 focus:ring-green-200 focus:outline-none">
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-          </svg>
-          <span class="sr-only">Request Pickup</span>
-      </button>
-  </div>
-  @include("nasabah.pickUpRequest")
-  @include('nasabah.detailHistory')
+   @foreach ($pickupHistories as $pickupHistory)
+    @if ($pickupHistory->status->id == 5)
+        @include('nasabah.detailHistory')
+    @endif
+   @endforeach
+   
 </x-layout-nasabah>
