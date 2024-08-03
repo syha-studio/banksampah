@@ -118,9 +118,9 @@
                   </tr>
                   @include("nasabah.detailWithdraw")
                   @empty
-                     <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
-                        Tidak ada Riwayat Penarikan
-                     </div>
+                     <tr class="border-b dark:border-gray-700">
+                        <td class="px-4 py-10 text-center" colspan="6">Tidak Ada Riwayat Penarikan</td>
+                     </tr>
                   @endforelse
                </tbody>
            </table>
