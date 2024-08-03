@@ -1,6 +1,5 @@
 <?php
 
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SaldoController;
@@ -22,62 +21,72 @@ Route::get('/how-to-join-banksbima', function () {
 Route::get('/harga-sampah', [WastePriceController::class, 'index'])->name('wasteprice.index');
 
 
-//Register
-Route::get('/register', [RegisterController::class, 'getCity'])->middleware('guest');
-Route::get('/register-2', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register-2', [RegisterController::class, 'store']);
+// Guest Only
+Route::middleware(['guest'])->group(function () {
+    //Register
+    Route::get('/register', [RegisterController::class, 'getCity']);
+    Route::get('/register-2', [RegisterController::class, 'index']);
+    Route::post('/register-2', [RegisterController::class, 'store']);
+
+    //Login
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+});
 
 
-//Login
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
 
+// Nasabah - Only
+Route::middleware(['auth'])->group(function () {
+    // Logout
+    Route::post('/logout', [LoginController::class, 'logout']);
 
-// Nasabah - Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard')->middleware('auth');
-Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
-Route::post('/transfer/cancel/{id}', [DashboardController::class, 'transferCancel'])->name('transfer.cancel');
-Route::post('/pickup-request', [DashboardController::class, 'create'])->name('pickup.request');
-Route::post('/profile', [DashboardController::class, 'update'])->name('profile.update');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard');
+    Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
+    Route::post('/transfer/cancel/{id}', [DashboardController::class, 'transferCancel'])->name('transfer.cancel');
+    Route::post('/pickup-request', [DashboardController::class, 'create'])->name('pickup.request');
+    Route::post('/profile', [DashboardController::class, 'update'])->name('profile.update');
 
-// Nasabah - Saldo
-Route::get('/saldo', [SaldoController::class, 'index'])->name('nasabah.saldo')->middleware('auth');
-Route::post('/transfer', [SaldoController::class, 'create'])->name('withdraw.request');
+    // Saldo
+    Route::get('/saldo', [SaldoController::class, 'index'])->name('nasabah.saldo');
+    Route::post('/transfer', [SaldoController::class, 'create'])->name('withdraw.request');
 
-// Nasabah - History
-Route::get('/history', [PickupController::class, 'index'])->name('nasabah.history')->middleware('auth');
+    // History
+    Route::get('/history', [PickupController::class, 'index'])->name('nasabah.history');
 
-// Nasabah - Shop
-Route::get('/shop', function () {
-    return view('nasabah.shop', ['title' => 'Shop - Banks BIMA']);
-})->middleware('auth');
+    // Shop
+    Route::get('/shop', function () {
+        return view('nasabah.shop', ['title' => 'Shop - Banks BIMA']);
+    });
+});
 
 // Admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard', ['title' => 'Dashboard - Admin Banks BIMA']);
-})->middleware('auth');
-
-Route::get('/admin/financial-report', function () {
-    return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);
-})->middleware('auth');
-
-Route::get('/admin/waste-report', function () {
-    return view('admin.laporanSampah', ['title' => 'Waste Report - Admin Banks BIMA']);
-})->middleware('auth');
-
-Route::get('/admin/deposit-log', function () {
-    return view('admin.logSetoranSampah', ['title' => 'Deposit Log - Admin Banks BIMA']);
-})->middleware('auth');
-
-Route::get('/admin/nasabah', function () {
-    return view('admin.nasabahManagement', ['title' => 'Nasabah Management - Admin Banks BIMA']);
-})->middleware('auth');
-
-Route::get('/admin/pickup', function () {
-    return view('admin.pickUpManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
-})->middleware('auth');
-
-Route::get('/admin/pricing', function () {
-    return view('admin.priceManagement', ['title' => 'Price Management - Admin Banks BIMA']);
-})->middleware('auth');
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard', ['title' => 'Dashboard - Admin Banks BIMA']);
+    });
+    
+    Route::get('/admin/financial-report', function () {
+        return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);
+    });
+    
+    Route::get('/admin/waste-report', function () {
+        return view('admin.laporanSampah', ['title' => 'Waste Report - Admin Banks BIMA']);
+    });
+    
+    Route::get('/admin/deposit-log', function () {
+        return view('admin.logSetoranSampah', ['title' => 'Deposit Log - Admin Banks BIMA']);
+    });
+    
+    Route::get('/admin/nasabah', function () {
+        return view('admin.nasabahManagement', ['title' => 'Nasabah Management - Admin Banks BIMA']);
+    });
+    
+    Route::get('/admin/pickup', function () {
+        return view('admin.pickUpManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
+    });
+    
+    Route::get('/admin/pricing', function () {
+        return view('admin.priceManagement', ['title' => 'Price Management - Admin Banks BIMA']);
+    });
+});
