@@ -36,11 +36,13 @@ Route::post('/logout', [LoginController::class, 'logout']);
 // Nasabah - Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard')->middleware('auth');
 Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
+Route::post('/transfer/cancel/{id}', [DashboardController::class, 'transferCancel'])->name('transfer.cancel');
 Route::post('/pickup-request', [DashboardController::class, 'create'])->name('pickup.request');
 Route::post('/profile', [DashboardController::class, 'update'])->name('profile.update');
 
 // Nasabah - Saldo
 Route::get('/saldo', [SaldoController::class, 'index'])->name('nasabah.saldo')->middleware('auth');
+Route::post('/transfer', [SaldoController::class, 'create'])->name('withdraw.request');
 
 // Nasabah - History
 Route::get('/history', function () {

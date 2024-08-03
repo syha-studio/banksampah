@@ -13,13 +13,15 @@ class DashboardController extends Controller
     public function index()
     {
         
-        $pickup = Pickup::where('user_id',auth()->user()->id)->whereIn('status_id', [1, 2, 4])->get();
+        $pickup = Pickup::where('user_id',auth()->user()->id)->whereIn('status_id', [1, 2, 3])->get();
+        $withdrawActive = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [1, 2, 4])->get();
         $pickupHistory = Pickup::where('user_id',auth()->user()->id)->whereIn('status_id', [5, 7, 8])->limit(3)->get();
         $withdraw = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [6, 7, 9])->limit(3)->get();
         // return $pickup;
         return view('nasabah.dashboard',[
             'title' => 'Dashboard',
             'pickups' => $pickup,
+            'withdrawActives' => $withdrawActive,
             'pickupHistories' => $pickupHistory,
             'withdraws' => $withdraw
         ]);
@@ -34,6 +36,17 @@ class DashboardController extends Controller
 
         return redirect()->route('nasabah.dashboard')->with('success', 'Permintaan pickup telah dibatalkan.');
     }
+
+    public function transferCancel($id)
+    {
+        $pickup = Withdraw::where('user_id', auth()->id())->findOrFail($id);
+
+        $pickup->status_id = 7;
+        $pickup->save();
+
+        return redirect()->route('nasabah.dashboard')->with('success', 'Permintaan transfer telah dibatalkan.');
+    }
+
 
     public function create(Request $request)
     {

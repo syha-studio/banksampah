@@ -96,6 +96,50 @@
             </ul>
          </div>
       </div>
+      <div class="w-full mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+         <div class="flex items-center justify-between mb-4">
+            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+               Penarikan Aktif
+            </h5>
+         </div>
+         <div class="flow-root">
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+               <li class="py-3 sm:py-4">
+                  <div class="flex items-center">
+                     @if ($withdrawActives->isNotEmpty())
+                        @foreach ($withdrawActives as $withdrawActive)
+                         <div class="flex-1 min-w-0 ms-4">
+                              <div class="flex items-center justify-start">
+                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    Rp {{ $withdrawActive->total }}
+                                 </p>
+                                 @if ($withdrawActive->status->id == 1)
+                                    <span class="ml-2">
+                                       <form action="{{ route('transfer.cancel', $withdrawActive->id) }}" method="POST" class="inline">
+                                             @csrf
+                                             <button type="submit" class="text-red-500">Batal</button>
+                                       </form>
+                                    </span>
+                                 @endif
+                              </div>
+                              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                 Terakhir diupdate {{ $withdrawActive->updated_at }}
+                              </p>
+                         </div>
+                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                           {{ $withdrawActive->status->name }}
+                         </div>
+                        @endforeach
+                     @else
+                         <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
+                             Tidak ada Permintaan Aktif
+                         </div>
+                     @endif
+                 </div>
+               </li>
+            </ul>
+         </div>
+      </div>
       <div class="grid grid-cols-2 gap-4 mb-4">
          <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">

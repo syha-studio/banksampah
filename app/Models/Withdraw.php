@@ -9,6 +9,8 @@ class Withdraw extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function status()
     {
         return $this->belongsTo(Status::class);

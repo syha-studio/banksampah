@@ -1,6 +1,19 @@
 <x-layout-nasabah>
    <x-slot:title>{{ $title }}</x-slot:title>
    <div class="p-4 mt-14">
+      @if (@session()->has('success'))
+         <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+               <div class="ms-3 text-sm font-medium">
+               {{ session('success') }}
+               </div>
+               <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+                  <span class="sr-only">Close</span>
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+               </button>
+         </div>
+      @endif
       <div class="grid grid-cols-3 gap-4 mb-4">
          <div class="flex items-center col-span-1 justify-start w-full  bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <div class="p-6 w-full">
@@ -29,12 +42,24 @@
                <h5 class="font-semibold text-2xl">Transfer</h5>
             </div>
             <div class="flex flex-row justify-center items-center gap-4">
-               <button data-modal-target="transferBank" data-modal-toggle="transferBank" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-design-secondary rounded-lg bg-design-primary hover:bg-green-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 relative">
+               <button @if($withdrawActives->isNotEmpty()) disabled data-tooltip-target="tooltip-left-2" data-tooltip-placement="bottom" @endif data-modal-target="transferBank" data-modal-toggle="transferBank" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-design-secondary rounded-lg bg-design-primary hover:bg-green-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 relative">
                   Transfer Bank
                </button>
-               <button data-modal-target="transferEwallet" data-modal-toggle="transferEwallet" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-design-secondary rounded-lg bg-design-primary hover:bg-green-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 relative">
+               <button @if($withdrawActives->isNotEmpty()) disabled data-tooltip-target="tooltip-left" data-tooltip-placement="bottom" @endif data-modal-target="transferEwallet" data-modal-toggle="transferEwallet" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-design-secondary rounded-lg bg-design-primary hover:bg-green-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 relative">
                   Transfer E-Wallet
                </button>
+               <div id="tooltip-left" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                  @foreach($withdrawActives as $withdrawActive)
+                     {{ $withdrawActive->status->name }}
+                  @endforeach
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+              <div id="tooltip-left-2" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+               @foreach($withdrawActives as $withdrawActive)
+                  {{ $withdrawActive->status->name }}
+               @endforeach
+               <div class="tooltip-arrow" data-popper-arrow></div>
+           </div>
             </div>
          </div>
      </div>
