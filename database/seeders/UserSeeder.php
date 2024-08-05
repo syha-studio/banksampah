@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\User;
 use App\Models\Branch;
 use Illuminate\Database\Seeder;
@@ -15,6 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $branch1 = Branch::find(1);
+        $branch2 = Branch::find(2);
         // Generate users with default role_id (1) and role_id 2 only 5 times
         User::create(
             [
@@ -26,7 +27,7 @@ class UserSeeder extends Seeder
                 'whatsapp' => '081234567890',
                 'address' => 'Alamat Dwi Jaya Rungkut',
                 'district_id' => 14,
-                'branch_id' => 1, // Anda mungkin perlu mengubah sesuai dengan nama cabang yang ada di database
+                'branch_id' => $branch1->id, // Anda mungkin perlu mengubah sesuai dengan nama cabang yang ada di database
                 'saldo' => 0,
             ]
         );
@@ -40,9 +41,9 @@ class UserSeeder extends Seeder
                 'whatsapp' => '081234567891',
                 'address' => 'Alamat Sejahtera Gubeng',
                 'district_id' => 24,
-                'branch_id' => 2, // Anda mungkin perlu mengubah sesuai dengan nama cabang yang ada di database
+                'branch_id' => $branch2->id, // Anda mungkin perlu mengubah sesuai dengan nama cabang yang ada di database
                 'saldo' => 0,
-            ],
+            ]
         );
 
         // Create the remaining users with default role_id (1)
