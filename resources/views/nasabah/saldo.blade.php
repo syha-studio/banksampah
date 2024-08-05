@@ -20,7 +20,7 @@
                <h5 class="mb-2 text-2xl font-bold justify-start tracking-tight text-gray-900 dark:text-white">Saldo</h5>
                <div class="flex items-center justify-between">
                   <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">Rp</p>
-                  <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">{{ auth()->user()->saldo}}</p>
+                  <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">{{ number_format(auth()->user()->saldo, 0, ',', '.') }}</p>
                </div>
             </div>
          </div>
@@ -107,7 +107,7 @@
                            {{ $withdraw->method->name }}
                         </td>
                         <td class="px-6 py-4">
-                           {{ $withdraw->total }}
+                           {{ number_format($withdraw->total, 0, ',', '.') }}
                         </td>
                         <td class="px-6 py-4">
                            {{ $withdraw->status->name }}

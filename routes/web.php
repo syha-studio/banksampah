@@ -7,6 +7,8 @@ use App\Http\Controllers\PickupController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WastePriceController;
+use App\Http\Controllers\AdminDashboardController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Public
 Route::get('/', function () {
@@ -34,12 +36,15 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
-
-// Nasabah - Only
+// Auth
 Route::middleware(['auth'])->group(function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout']);
+});
 
+
+// Nasabah - Only
+Route::middleware(['nasabah'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard');
     Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
@@ -61,10 +66,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Admin
-Route::middleware(['auth','admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard', ['title' => 'Dashboard - Admin Banks BIMA']);
-    });
+Route::middleware(['admin'])->group(function () {
+    // Dashboard
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
+    Route::put('/pickup/{id}/update', [AdminDashboardController::class, 'update'])->name('pickup.update');
     
     Route::get('/admin/financial-report', function () {
         return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);
@@ -84,6 +89,10 @@ Route::middleware(['auth','admin'])->group(function () {
     
     Route::get('/admin/pickup', function () {
         return view('admin.pickUpManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
+    });
+
+    Route::get('/admin/saldo', function () {
+        return view('admin.saldoManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
     });
     
     Route::get('/admin/pricing', function () {

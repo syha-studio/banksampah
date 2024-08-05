@@ -50,13 +50,13 @@
                                 {{ $pickupDetail->wastePrice->waste->unit }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $pickupDetail->qty }}
+                                {{ number_format($pickupDetail->qty, 0, ',', '.') }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $pickupDetail->wastePrice->price }}
+                                {{ number_format($pickupDetail->wastePrice->price, 0, ',', '.') }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $pickupDetail->total }}
+                                {{ number_format($pickupDetail->total, 0, ',', '.') }}
                             </td>
                         </tr>
                     @endforeach

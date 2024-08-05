@@ -39,7 +39,7 @@
                                 {{ $pickupHistory->status->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $pickupHistory->total }}
+                                {{ number_format($pickupHistory->total, 0, ',', '.') }}
                             </td>
                             <td class="px-6 py-4 text-right">
                                 @if ($pickupHistory->status->id == 5)

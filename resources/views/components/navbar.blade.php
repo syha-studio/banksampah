@@ -22,7 +22,11 @@
         <div class="hidden md:block">
           <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" type="button">
             <span class="sr-only">Open user menu</span>
-            <img class="w-8 h-8 rounded-full" src="/img/avatar-default.png" alt="user photo">
+            @if (auth()->user()->role_id == 2)
+              <img class="w-8 h-8 rounded-full" src="/img/avatar-bank.png" alt="user photo">
+            @else
+              <img class="w-8 h-8 rounded-full" src="/img/avatar-default.png" alt="user photo">
+            @endif
           </button>
           <!-- Dropdown menu -->
           <div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-56 dark:bg-gray-700 dark:divide-gray-600">
@@ -31,7 +35,11 @@
                 <div class="font-medium truncate">{{ auth()->user()->email }}</div>
               </div>
               <div class="py-2">
+                @if (auth()->user()->role_id == 2)
+                <a href="/admin/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                @else
                 <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                @endif
               </div>
               <div class="py-2 w-full">
                 <form action="/logout" method="post">
@@ -87,7 +95,11 @@
           <div class="font-medium truncate">{{ auth()->user()->email }}</div>
         </div>
         <div class="my-2 text-design-white hover:bg-gray-500 hover:text-design-white block rounded-md px-3 py-2 text-sm font-medium">
-          <a href="/dashboard">Dashboard</a>
+          @if (auth()->user()->role_id == 2)
+            <a href="/admin/dashboard">Dashboard</a>
+          @else
+            <a href="/dashboard">Dashboard</a>
+          @endif
         </div>
         <div class="mb-2 w-full">
           <form action="/logout" method="post">

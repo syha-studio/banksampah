@@ -43,7 +43,7 @@
                <h5 class="mb-2 text-2xl font-bold justify-start tracking-tight text-gray-900 dark:text-white">Saldo</h5>
                <div class="flex items-center justify-between">
                   <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">Rp</p>
-                  <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">{{ auth()->user()->saldo}}</p>
+                  <p class="font-normal text-4xl text-gray-700 dark:text-gray-400">{{ number_format(auth()->user()->saldo, 0, ',', '.') }}</p>
                </div>
             </a>
          </div>
@@ -51,7 +51,7 @@
       <div class="w-full mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
          <div class="flex items-center justify-between mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-               Permintaan Aktif
+               Permintaan Setoran Aktif
             </h5>
          </div>
          <div class="flow-root">
@@ -99,7 +99,7 @@
       <div class="w-full mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
          <div class="flex items-center justify-between mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-               Penarikan Aktif
+               Permintaan Penarikan Aktif
             </h5>
          </div>
          <div class="flow-root">
@@ -111,7 +111,7 @@
                          <div class="flex-1 min-w-0 ms-4">
                               <div class="flex items-center justify-start">
                                  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Rp {{ $withdrawActive->total }}
+                                    Rp {{ number_format($withdrawActive->total , 0, ',', '.') }}
                                  </p>
                                  @if ($withdrawActive->status->id == 1)
                                     <span class="ml-2">
@@ -164,7 +164,7 @@
                               </p>
                            </div>
                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                              Rp {{ $pickupHistory->total }}
+                              Rp {{ number_format($pickupHistory->total, 0, ',', '.') }}
                            </div>
                         </div>
                      </li>
@@ -199,7 +199,7 @@
                               </p>
                            </div>
                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                              Rp {{ $withdraw->total }}
+                              Rp {{ number_format($withdraw->total, 0, ',', '.') }}
                            </div>
                         </div>
                      </li>
