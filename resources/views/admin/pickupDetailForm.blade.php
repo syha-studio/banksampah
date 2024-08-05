@@ -16,13 +16,13 @@
            <!-- Modal body -->
            <form action="/pick" method="post">
             @csrf
-            <div class="grid gap-4 mb-10" id="pickup-details">
+            <div class="grid gap-4 mb-10" id="pickup-details{{ $pickup->id }}">
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         
-                <div class="pickup-detail flex items-center space-x-4">
+                <div class="pickup-detail{{ $pickup->id }} flex items-center space-x-4">
                     <x-form-input type="text" name="waste[]" id="waste_0" label="Waste" placeholder="Masukkan jenis waste" class="w-full" />
                     <x-form-input type="number" name="qty[]" id="qty_0" label="Quantity" placeholder="Masukkan quantity" class="w-full" />
-                    <button type="button" class="add-row bg-green-500 text-white rounded-lg px-4 py-2">Add</button>
+                    <button type="button" class="add-row{{ $pickup->id }} bg-green-500 text-white rounded-lg px-4 py-2">Add</button>
                 </div>
             </div>
         
@@ -38,24 +38,24 @@
 </div>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
-       let counter = 1;
-
-       document.querySelector('.add-row').addEventListener('click', function () {
-           const newRow = document.createElement('div');
-           newRow.classList.add('pickup-detail', 'flex', 'items-center', 'space-x-4');
-           newRow.innerHTML = `
-               <x-form-input type="text" name="waste[]" id="waste_${counter}" label="Waste" placeholder="Masukkan jenis waste" class="w-full" />
-               <x-form-input type="number" name="qty[]" id="qty_${counter}" label="Quantity" placeholder="Masukkan quantity" class="w-full" />
-               <button type="button" class="remove-row bg-red-500 text-white rounded-lg px-4 py-2">Remove</button>
-           `;
-
-           document.getElementById('pickup-details').appendChild(newRow);
-           counter++;
-
-           newRow.querySelector('.remove-row').addEventListener('click', function () {
-               newRow.remove();
-           });
-       });
-   });
-</script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let counter = 1;
+ 
+        document.querySelector('.add-row{{ $pickup->id }}').addEventListener('click', function () {
+            const newRow = document.createElement('div');
+            newRow.classList.add('pickup-detail{{ $pickup->id }}', 'flex', 'items-center', 'space-x-4');
+            newRow.innerHTML = `
+                <x-form-input type="text" name="waste_[]" id="waste_${counter}" label="Waste" placeholder="Masukkan jenis waste" class="w-full" />
+                <x-form-input type="number" name="qty_[]" id="qty_${counter}" label="Quantity" placeholder="Masukkan quantity" class="w-full" />
+                <button type="button" class="remove-row bg-red-500 text-white rounded-lg px-4 py-2">Remove</button>
+            `;
+ 
+            document.getElementById('pickup-details{{ $pickup->id }}').appendChild(newRow);
+            counter++;
+ 
+            newRow.querySelector('.remove-row').addEventListener('click', function () {
+                newRow.remove();
+            });
+        });
+    });
+ </script>
