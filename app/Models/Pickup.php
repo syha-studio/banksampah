@@ -9,12 +9,8 @@ class Pickup extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'status_id',
-        'total',
-        'date',
-        'image_id'
+    protected $guarded = [
+        'id'
     ];
 
     public function pickupDetail()

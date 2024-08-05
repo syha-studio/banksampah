@@ -9,7 +9,9 @@ class WastePrice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['branch_id', 'waste_id', 'price'];
+    protected $guarded = [
+        'id'
+    ];
 
     public function pickupDetail()
     {

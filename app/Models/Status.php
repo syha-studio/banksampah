@@ -9,6 +9,10 @@ class Status extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function pickup()
     {
         return $this->hasMany(Pickup::class);

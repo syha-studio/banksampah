@@ -9,6 +9,10 @@ class PickupDetail extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function wastePrice()
     {
         return $this->belongsTo(WastePrice::class);

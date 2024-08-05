@@ -9,6 +9,10 @@ class MethodCategory extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function method()
     {
         return $this->hasMany(Method::class);

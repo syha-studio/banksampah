@@ -14,6 +14,32 @@
                </button>
          </div>
       @endif
+      @if ($hasPickupToday)
+         <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+         <div class="ms-3 text-sm font-medium">
+         Ada Jadwal Pengambilan Hari Ini!
+         </div>
+         <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+         </button>
+         </div>
+      @endif
+      @error('pickup_date')
+         <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+            <div class="ms-3 text-sm font-medium">
+               Isi Tanggal Pengambilan dulu!
+            </div>
+            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+               <span class="sr-only">Close</span>
+               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+               </svg>
+            </button>
+         </div>
+      @enderror
       <div class="grid grid-cols-8 gap-4 mb-4">
          <div class="w-full col-span-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between p-6">
@@ -69,14 +95,12 @@
                                           Pick Up Tanggal {{ $pickup->pickup_date }}
                                        @endif
                                     </p>
-                                    @if ($pickup->status->id == 1)
-                                       <span class="ml-2">
-                                          <form action="{{ route('pickup.cancel', $pickup->id) }}" method="POST" class="inline">
-                                                @csrf
-                                                <button type="submit" class="text-red-500">Batal</button>
-                                          </form>
-                                       </span>
-                                    @endif
+                                    <span class="ml-2">
+                                       <form action="{{ route('pickup.cancel2', $pickup->id) }}" method="POST" class="inline">
+                                             @csrf
+                                             <button type="submit" class="text-red-500">Batal</button>
+                                       </form>
+                                    </span>
                                  </div>
                                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                     Terakhir diupdate {{ $pickup->updated_at }}
@@ -86,21 +110,33 @@
                               {{ $pickup->status->name }}
                            </div>
                            <div class="px-4 inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                              <form action="{{ route('pickup.update', $pickup->id) }}" method="POST" class="inline">
-                                 @csrf
-                                 @method('PUT')
-                                 <div class="inline-flex relative w-36">
-                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              @if ($pickup->status->id == 1)
+                                 <form action="{{ route('pickup.update', $pickup->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <div class="relative inline-flex w-36">
+                                       <input datepicker-min-date="{{ date('Y-m-d') }}" type="text" id="datepicker-input" name="pickup_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" readonly>
+                                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                                         </svg>
-                                     </div>
-                                     <input datepicker id="datepicker-format" datepicker-autohide datepicker-min-date="{{ today() }}" name="pickup_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full ps-10 p-2.5" placeholder="Select date">
+                                          </svg>
+                                       </div>
                                  </div>
+                                    <div class="inline-flex relative max-w-sm">
+                                       <button type="submit" class="ml-2 text-design-primary hover:text-green-600">Update</button>
+                                    </div>
+                                 </form>
+                              @elseif ($pickup->status->id == 2)
+                                 <form action="{{ route('pickup.take', $pickup->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <div class="inline-flex relative max-w-sm">
+                                       <button type="submit" class="ml-2 text-design-primary hover:text-green-600">Ambil Sekarang</button>
+                                    </div>
+                                 </form>
+                              @else
                                  <div class="inline-flex relative max-w-sm">
-                                     <button type="submit" class="ml-2 text-design-primary hover:text-green-600">Update</button>
+                                    <a data-modal-target="detail-pickup{{ $pickup->id }}" data-modal-toggle="detail-pickup{{ $pickup->id }}" class="font-medium text-design-primary hover:underline cursor-pointer">Isi Detail</a>
                                  </div>
-                             </form>
+                              @endif
                            </div>
                         </div>
                      </li>
@@ -233,15 +269,25 @@
       </div>
    </div>
   @include("nasabah.profileEdit")
+  @foreach ($pickups as $pickup)
+    @if ($pickup->status->id == 3)
+        @include('admin.pickupDetailForm')
+    @endif
+   @endforeach
   <script>
-   document.addEventListener('DOMContentLoaded', function() {
-       const datepickers = document.querySelectorAll('[datepicker]');
-       datepickers.forEach(datepicker => {
-           new Datepicker(datepicker, {
-               format: 'yyyy-mm-dd',
-               autohide: true,
-           });
-       });
+   document.addEventListener('DOMContentLoaded', function () {
+      const datepickerInput = document.getElementById('datepicker-input');
+      
+      // Initialize the datepicker using the Flowbite plugin
+      new Datepicker(datepickerInput, {
+         // You can add custom options here if needed
+         format: 'yyyy-mm-dd'
+      });
+
+      // Open the datepicker when clicking on the icon
+      document.querySelector('.pl-3').addEventListener('click', function () {
+         datepickerInput.focus();
+      });
    });
 </script>
 </x-layout-admin>

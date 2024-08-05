@@ -7,7 +7,7 @@ use App\Http\Controllers\PickupController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WastePriceController;
-use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Public
@@ -68,8 +68,10 @@ Route::middleware(['nasabah'])->group(function () {
 // Admin
 Route::middleware(['admin'])->group(function () {
     // Dashboard
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
-    Route::put('/pickup/{id}/update', [AdminDashboardController::class, 'update'])->name('pickup.update');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/pickup/cancel/{id}', [AdminController::class, 'cancel'])->name('pickup.cancel2');
+    Route::post('/pickup/{id}/update', [AdminController::class, 'update'])->name('pickup.update');
+    Route::post('/pickup/{id}/take', [AdminController::class, 'take'])->name('pickup.take');
     
     Route::get('/admin/financial-report', function () {
         return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);

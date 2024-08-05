@@ -9,6 +9,10 @@ class Waste extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function wastePrice()
     {
         return $this->hasMany(WastePrice::class);
