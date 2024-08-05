@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('account_number')->nullable()->default(null);
             $table->bigInteger('total');
             $table->string('message')->nullable()->default(null);
-            $table->foreignId('image_id')->constrained()->nullable()->default(null);
+            $table->foreignId('image_id')->constrained();
             $table->foreignId('status_id')->constrained();
             $table->timestamps();
         });

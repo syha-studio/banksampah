@@ -13,6 +13,17 @@ class BranchSeeder extends Seeder
      */
     public function run(): void
     {
-        Branch::factory()->count(5)->create();
+        
+        Branch::create(
+            [
+            'name' => 'Dwi Jaya Rungkut',
+            'district_id' => 14
+            ],
+            [
+            'name' => 'Sejahtera Gubeng',
+            'district_id' => 24
+            ]
+        );
     }
+    
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Image;
 use App\Models\Pickup;
+use App\Models\PickupDetail;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -14,10 +15,6 @@ class PickupSeeder extends Seeder
      */
     public function run(): void
     {
-        if (Image::count() == 0) {
-            $this->call(ImageSeeder::class);
-        }
-        
         Pickup::factory()->count(35)->create();
     }
 }

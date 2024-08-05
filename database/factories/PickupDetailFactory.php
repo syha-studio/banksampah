@@ -22,7 +22,7 @@ class PickupDetailFactory extends Factory
 
         return [
             'waste_price_id' => $wastePrice->id,
-            'pickup_id' => Pickup::inRandomOrder()->first()->id,
+            'pickup_id' => Pickup::factory(),
             'qty' => $qty,
             'total' => $total,
         ];

@@ -14,6 +14,6 @@ class PickupDetailSeeder extends Seeder
     public function run(): void
     {
         // Create 10 pickup details
-        PickupDetail::factory()->count(40)->create();
+        PickupDetail::factory()->count(3)->create();
     }
 }

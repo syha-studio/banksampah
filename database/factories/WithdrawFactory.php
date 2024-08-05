@@ -27,8 +27,18 @@ class WithdrawFactory extends Factory
             'account_number' => $this->faker->bankAccountNumber,
             'total' => $this->faker->numberBetween(10000, 1000000),
             'message' => $this->faker->sentence,
-            'image_id' => Image::inRandomOrder()->first()->id,
+            'image_id' => 1,
             'status_id' => $this->faker->randomElement($statusIds),
         ];
+    }
+
+    public function configure(): self
+    {
+        return $this->afterCreating(function (Withdraw $withdraw) {
+            // Create an Image and associate it with the Withdraw
+            $image = Image::factory()->create();
+            $withdraw->image_id = $image->id;
+            $withdraw->save();
+        });
     }
 }

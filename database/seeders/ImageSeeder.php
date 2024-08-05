@@ -13,6 +13,6 @@ class ImageSeeder extends Seeder
      */
     public function run(): void
     {
-        Image::factory()->count(1)->create();
+        Image::create(['file_name' => null]);
     }
 }
