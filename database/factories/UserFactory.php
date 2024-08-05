@@ -26,11 +26,6 @@ class UserFactory extends Factory
     {
         // Set default role_id
         $roleId = Role::where('id', 1)->first()->id;
-        
-        // Randomly assign role_id 2 only 5 times
-        if (User::count() < 5 && $this->faker->boolean(20)) { // 20% chance to use role_id 2
-            $roleId = Role::where('id', 2)->first()->id;
-        }
 
         return [
             'role_id' => $roleId,

@@ -28,7 +28,9 @@ class UserSeeder extends Seeder
                 'district_id' => 14,
                 'branch_id' => 1, // Anda mungkin perlu mengubah sesuai dengan nama cabang yang ada di database
                 'saldo' => 0,
-            ],
+            ]
+        );
+        User::create(
             [
                 'role_id' => 2,
                 'email' => 'sejahteragubeng@gmail.com',
