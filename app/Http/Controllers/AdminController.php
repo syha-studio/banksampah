@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
+    // Show Dashboard
     public function index()
     {
         $categoriesOptions = Category::all();
@@ -59,6 +60,7 @@ class AdminController extends Controller
         ]);
     }
 
+    // Cancel Permintaan Setoran
     public function cancel($id)
     {
         $pickup = Pickup::findOrFail($id);
@@ -69,6 +71,7 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Permintaan pickup telah dibatalkan.');
     }
 
+    // Set Tanggal Pengambilan Sampah
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -86,6 +89,8 @@ class AdminController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('admin.dashboard')->with('success', 'Pickup updated successfully.');
     }
+
+    // Ubah Status ke 'Dalam Perjalanan' di Hari Pengambilan
     public function take($id)
     {
         // Temukan Pickup berdasarkan ID
@@ -98,46 +103,41 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Pickup updated successfully.');
     }
 
-    public function storePickupDetails(Request $request, $pickupId)
+    // Simpan Pickup Detail
+    public function storePickupDetails(Request $request, $id)
     {
-        // Validasi data input
-        $rules = [];
-        $data = [];
+        // Validate the input
+        $validatedData = $request->validate([
+            'pickup_details.*.waste_price_id' => 'required|integer|exists:waste_prices,id',
+            'pickup_details.*.qty' => 'required|integer|min:1',
+        ]);
 
-        // Loop untuk validasi setiap detail
-        foreach ($request->input() as $key => $value) {
-            if (strpos($key, 'category_') === 0) {
-                $index = str_replace('category_', '', $key);
-                $rules["waste_$index"] = 'required|exists:wastes,id';
-                $rules["qty_$index"] = 'required|numeric|min:0';
-                
-                $data[$key] = $value;
-                $data["waste_$index"] = $request->input("waste_$index");
-                $data["qty_$index"] = $request->input("qty_$index");
-            }
+        // Prepare the data for insertion
+        $pickupDetails = [];
+        $total = 0;
+        foreach ($validatedData['pickup_details'] as $index => $detail) {
+            $pickupDetails[] = [
+                'waste_price_id' => $detail['waste_price_id'],
+                'pickup_id' => $id,
+                'qty' => $detail['qty'],
+                'total' => $detail['qty'] * WastePrice::where('id', $detail['waste_price_id'])->first()->price,
+            ];
+            $total = $total + ($detail['qty'] * WastePrice::where('id', $detail['waste_price_id'])->first()->price);
         }
-
-        $validator = Validator::make($data, $rules);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        $saldo = Pickup::where('id',$id)->first()->user->saldo;
+        $saldo = $saldo + $total;
+        $saldoUpdate = ['saldo' => $saldo];
+        $pickup = ['status_id' => 5,
+                    'total' => $total];
+        // Perform mass insertion
+        try {
+            PickupDetail::insert($pickupDetails);
+            Pickup::where('id',$id)->update($pickup);
+            User::where('id', Pickup::where('id',$id)->first()->user_id)->update($saldoUpdate);
+            return redirect()->back()->with('success', 'Pickup details saved successfully.');
+        } catch (Exception $e) {
+            // Handle any errors during insertion
+            return redirect()->back()->with('error', 'Failed to save pickup details.');
         }
-
-        // Simpan data detail pickup
-        foreach ($request->input() as $key => $value) {
-            if (strpos($key, 'category_') === 0) {
-                $index = str_replace('category_', '', $key);
-
-                $pickupDetail = new PickupDetail();
-                $pickupDetail->pickup_id = $pickupId;
-                $pickupDetail->waste_id = $request->input("waste_$index");
-                $pickupDetail->quantity = $request->input("qty_$index");
-                $waste = Waste::find($pickupDetail->waste_id);
-                $pickupDetail->total = $waste ? $waste->price * $pickupDetail->quantity : 0;
-                $pickupDetail->save();
-            }
-        }
-
-        return redirect()->back()->with('success', 'Pickup details saved successfully!');
     }
 }

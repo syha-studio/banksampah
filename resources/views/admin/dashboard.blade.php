@@ -1,7 +1,8 @@
 <x-layout-admin>
    <x-slot:title>{{ $title }}</x-slot:title>
-   
    <div class="p-4 mt-14">
+
+      {{-- Alert Process --}}
       @if (@session()->has('success'))
          <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                <div class="ms-3 text-sm font-medium">
@@ -15,12 +16,14 @@
                </button>
          </div>
       @endif
+
+      {{-- Alert if there is Pickup Today --}}
       @if ($hasPickupToday)
-         <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+         <div id="alert-2" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
          <div class="ms-3 text-sm font-medium">
          Ada Jadwal Pengambilan Hari Ini!
          </div>
-         <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+         <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -28,6 +31,8 @@
          </button>
          </div>
       @endif
+
+      {{-- Alert Error Isi Tanggal --}}
       @error('pickup_date')
          <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
             <div class="ms-3 text-sm font-medium">
@@ -41,7 +46,10 @@
             </button>
          </div>
       @enderror
+
       <div class="grid grid-cols-8 gap-4 mb-4">
+
+         {{-- Profile Card --}}
          <div class="w-full col-span-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between p-6">
                <div class="flex flex-row items-center">
@@ -65,6 +73,8 @@
                </div>
             </div>
         </div>
+
+        {{-- Saldo Nasabah Bank Sampah BIMA --}}
          <div class="flex items-center col-span-3 justify-start w-full  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <a href="/admin/saldo" class="p-6 w-full">
                <h5 class="mb-2 text-2xl font-bold justify-start tracking-tight text-gray-900 dark:text-white">Total Saldo Nasabah</h5>
@@ -74,7 +84,10 @@
                </div>
             </a>
          </div>
+
       </div>
+
+      {{-- Permintaan Setoran Aktif --}}
       <div class="w-full mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
          <div class="flex items-center justify-between mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
@@ -82,6 +95,8 @@
             </h5>
          </div>
          <div class="flow-root">
+
+            {{-- List Permintaan --}}
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                @if ($pickups->isNotEmpty())
                   @foreach ($pickups as $pickup)
@@ -111,6 +126,8 @@
                               {{ $pickup->status->name }}
                            </div>
                            <div class="px-4 inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              
+                              {{-- Jika Status Menunggu Konfirmasi --}}
                               @if ($pickup->status->id == 1)
                                  <form action="{{ route('pickup.update', $pickup->id) }}" method="POST" class="inline">
                                     @csrf
@@ -126,6 +143,8 @@
                                        <button type="submit" class="ml-2 text-design-primary hover:text-green-600">Update</button>
                                     </div>
                                  </form>
+
+                              {{-- Jika Status Sudah distujui --}}
                               @elseif ($pickup->status->id == 2)
                                  <form action="{{ route('pickup.take', $pickup->id) }}" method="POST" class="inline">
                                     @csrf
@@ -133,11 +152,14 @@
                                        <button type="submit" class="ml-2 text-design-primary hover:text-green-600">Ambil Sekarang</button>
                                     </div>
                                  </form>
+
+                              {{-- Jika Status Dalam Perjalanan --}}
                               @else
                                  <div class="inline-flex relative max-w-sm">
                                     <a data-modal-target="detail-pickup{{ $pickup->id }}" data-modal-toggle="detail-pickup{{ $pickup->id }}" class="font-medium text-design-primary hover:underline cursor-pointer">Isi Detail</a>
                                  </div>
                               @endif
+
                            </div>
                         </div>
                      </li>
@@ -152,6 +174,8 @@
             </ul>
          </div>
       </div>
+
+      {{-- Permintaan Penarikan Aktif --}}
       <div class="w-full mb-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
          <div class="flex items-center justify-between mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
@@ -196,6 +220,8 @@
             </ul>
          </div>
       </div>
+
+      {{-- Riwayat Setoran --}}
       <div class="grid grid-cols-2 gap-4 mb-4">
          <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
@@ -268,27 +294,33 @@
             </div>
          </div>
       </div>
-   </div>
-  @include("nasabah.profileEdit")
-  @foreach ($pickups as $pickup)
-    @if ($pickup->status->id == 3)
-        @include('admin.pickupDetailForm')
-    @endif
-   @endforeach
-  <script>
-   document.addEventListener('DOMContentLoaded', function () {
-      const datepickerInput = document.getElementById('datepicker-input');
       
-      // Initialize the datepicker using the Flowbite plugin
-      new Datepicker(datepickerInput, {
-         // You can add custom options here if needed
-         format: 'yyyy-mm-dd'
-      });
+   </div>
 
-      // Open the datepicker when clicking on the icon
-      document.querySelector('.pl-3').addEventListener('click', function () {
-         datepickerInput.focus();
+   @include("nasabah.profileEdit")
+
+   {{-- Modal Pickup Detail --}}
+   @foreach ($pickups as $pickup)
+      @if ($pickup->status->id == 3)
+         @include('admin.pickupDetailForm')
+      @endif
+   @endforeach
+
+   {{-- Script Datepicker --}}
+   <script>
+      document.addEventListener('DOMContentLoaded', function () {
+         const datepickerInput = document.getElementById('datepicker-input');
+         
+         // Initialize the datepicker using the Flowbite plugin
+         new Datepicker(datepickerInput, {
+            // You can add custom options here if needed
+            format: 'yyyy-mm-dd'
+         });
+
+         // Open the datepicker when clicking on the icon
+         document.querySelector('.pl-3').addEventListener('click', function () {
+            datepickerInput.focus();
+         });
       });
-   });
-</script>
+   </script>
 </x-layout-admin>
