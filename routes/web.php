@@ -72,6 +72,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/pickup/cancel/{id}', [AdminController::class, 'cancel'])->name('pickup.cancel2');
     Route::post('/pickup/{id}/update', [AdminController::class, 'update'])->name('pickup.update');
     Route::post('/pickup/{id}/take', [AdminController::class, 'take'])->name('pickup.take');
+    Route::post('/pick/{pickupId}', [AdminController::class, 'storePickupDetails'])->name('pick.store');
     
     Route::get('/admin/financial-report', function () {
         return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);

@@ -72,6 +72,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-5">Cabang</th>
+                                <th scope="col" class="px-4 py-5 text-start">Kategori</th>
                                 <th scope="col" class="px-4 py-5 text-start">Jenis Sampah</th>
                                 <th scope="col" class="px-4 py-5 text-center">Satuan</th>
                                 <th scope="col" class="px-4 py-5 text-end">Harga Terkini</th>
@@ -81,6 +82,7 @@
                             @forelse ($wastePrices as $wastePrice)
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-4">{{ $wastePrice->branch->name }}</td>
+                                    <td class="px-4 py-4 text-start">{{ $wastePrice->waste->category->name }}</td>
                                     <td class="px-4 py-4 text-start">{{ $wastePrice->waste->name }}</td>
                                     <td class="px-4 py-4 text-center">{{ $wastePrice->waste->unit }}</td>
                                     <td class="px-4 py-4 text-end">Rp {{ number_format($wastePrice->price, 0, ',', '.') }}</td>

@@ -1,5 +1,6 @@
 <x-layout-admin>
    <x-slot:title>{{ $title }}</x-slot:title>
+   
    <div class="p-4 mt-14">
       @if (@session()->has('success'))
          <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">

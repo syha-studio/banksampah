@@ -25,7 +25,11 @@ class WastePriceController extends Controller
             $query->whereIn('branch_id', $selectedBranches);
         }
         
-        $wastePrices = $query->orderBy('branch_id')->orderBy('waste_id')->paginate(10);
+        $wastePrices = $query->join('wastes', 'waste_prices.waste_id', '=', 'wastes.id')
+        ->orderBy('waste_prices.branch_id')
+        ->orderBy('wastes.category_id')
+        ->orderBy('wastes.name')
+        ->paginate(10);
         $branches = Branch::withCount('wastePrices')->get();
         
         return view('listHarga', [
