@@ -221,14 +221,14 @@
          </div>
       </div>
 
-      {{-- Riwayat Setoran --}}
+      {{-- Riwayat Setoran dan Penarikan--}}
       <div class="grid grid-cols-2 gap-4 mb-4">
          <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
                   Riwayat Setoran
                </h5>
-               <a href="/history" class="text-sm font-medium text-design-primary hover:underline dark:text-blue-500">
+               <a href="/admin/pickup" class="text-sm font-medium text-design-primary hover:underline dark:text-blue-500">
                   View all
                </a>
             </div>
@@ -263,7 +263,7 @@
                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
                   Riwayat Penarikan
                </h5>
-               <a href="/saldo" class="text-sm font-medium text-design-primary hover:underline dark:text-blue-500">
+               <a href="/admin/saldo" class="text-sm font-medium text-design-primary hover:underline dark:text-blue-500">
                   View all
                </a>
             </div>

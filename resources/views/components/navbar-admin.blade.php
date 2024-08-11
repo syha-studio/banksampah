@@ -10,8 +10,6 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
        <ul class="space-y-2 font-medium">
           <x-side-nav-link href="/admin/dashboard" :active="request()->is('admin/dashboard')">Dashboard</x-side-nav-link>
-          <x-side-nav-link href="/admin/pickup" :active="request()->is('admin/pickup')">Pick Up Management</x-side-nav-link>
-          <x-side-nav-link href="/admin/saldo" :active="request()->is('admin/saldo')">Saldo Management</x-side-nav-link>
           <x-side-nav-link href="/admin/nasabah" :active="request()->is('admin/nasabah')">Nasabah</x-side-nav-link>
           <x-side-nav-link href="/admin/pricing" :active="request()->is('admin/pricing')">Waste Pricing</x-side-nav-link>
           <x-side-nav-link href="/admin/deposit-log" :active="request()->is('admin/deposit-log')">Deposit Log</x-side-nav-link>
