@@ -1,102 +1,245 @@
 <x-layout-admin>
-    <x-slot:title>{{ $title }}</x-slot:title>
-    <div class="p-4 mt-14">
-        <div class="grid grid-cols-3 gap-4 mb-4">
-           <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
+   <x-slot:title>{{ $title }}</x-slot:title>
+   <div class="p-4 mt-14">
+     <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center justify-center mb-4">
+           <h5 class="text-xl pb-4 font-bold leading-none text-center text-gray-900 dark:text-white">
+              List Harga Sampah
+           </h5>
         </div>
-        <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-           <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-              </svg>
-           </p>
+        <div>
+
         </div>
-        <div class="grid grid-cols-2 gap-4 mb-4">
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-        </div>
-        <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-           <p class="text-2xl text-gray-400 dark:text-gray-500">
-              <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-              </svg>
-           </p>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
-           <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-              <p class="text-2xl text-gray-400 dark:text-gray-500">
-                 <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                 </svg>
-              </p>
-           </div>
+        <div class="w-full">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <span class="flex items-center">
+                                Kategori
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                               Jenis Sampah
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Satuan
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Harga
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Apple Inc.</td>
+                        <td>AAPL</td>
+                        <td>$192.58</td>
+                        <td>$3.04T</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Microsoft Corporation</td>
+                        <td>MSFT</td>
+                        <td>$340.54</td>
+                        <td>$2.56T</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Alphabet Inc.</td>
+                        <td>GOOGL</td>
+                        <td>$134.12</td>
+                        <td>$1.72T</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Amazon.com Inc.</td>
+                        <td>AMZN</td>
+                        <td>$138.01</td>
+                        <td>$1.42T</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">NVIDIA Corporation</td>
+                        <td>NVDA</td>
+                        <td>$466.19</td>
+                        <td>$1.16T</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Tesla Inc.</td>
+                        <td>TSLA</td>
+                        <td>$255.98</td>
+                        <td>$811.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Meta Platforms Inc.</td>
+                        <td>META</td>
+                        <td>$311.71</td>
+                        <td>$816.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Berkshire Hathaway Inc.</td>
+                        <td>BRK.B</td>
+                        <td>$354.08</td>
+                        <td>$783.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">TSMC</td>
+                        <td>TSM</td>
+                        <td>$103.51</td>
+                        <td>$538.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">UnitedHealth Group Incorporated</td>
+                        <td>UNH</td>
+                        <td>$501.96</td>
+                        <td>$466.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Johnson & Johnson</td>
+                        <td>JNJ</td>
+                        <td>$172.85</td>
+                        <td>$452.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">JPMorgan Chase & Co.</td>
+                        <td>JPM</td>
+                        <td>$150.23</td>
+                        <td>$431.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Visa Inc.</td>
+                        <td>V</td>
+                        <td>$246.39</td>
+                        <td>$519.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Eli Lilly and Company</td>
+                        <td>LLY</td>
+                        <td>$582.97</td>
+                        <td>$552.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Walmart Inc.</td>
+                        <td>WMT</td>
+                        <td>$159.67</td>
+                        <td>$429.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Samsung Electronics Co., Ltd.</td>
+                        <td>005930.KS</td>
+                        <td>$70.22</td>
+                        <td>$429.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Procter & Gamble Co.</td>
+                        <td>PG</td>
+                        <td>$156.47</td>
+                        <td>$366.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Nestlé S.A.</td>
+                        <td>NESN.SW</td>
+                        <td>$120.51</td>
+                        <td>$338.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Roche Holding AG</td>
+                        <td>ROG.SW</td>
+                        <td>$296.00</td>
+                        <td>$317.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Chevron Corporation</td>
+                        <td>CVX</td>
+                        <td>$160.92</td>
+                        <td>$310.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">LVMH Moët Hennessy Louis Vuitton</td>
+                        <td>MC.PA</td>
+                        <td>$956.60</td>
+                        <td>$478.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Pfizer Inc.</td>
+                        <td>PFE</td>
+                        <td>$35.95</td>
+                        <td>$200.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Novo Nordisk A/S</td>
+                        <td>NVO</td>
+                        <td>$189.15</td>
+                        <td>$443.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">PepsiCo, Inc.</td>
+                        <td>PEP</td>
+                        <td>$182.56</td>
+                        <td>$311.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">ASML Holding N.V.</td>
+                        <td>ASML</td>
+                        <td>$665.72</td>
+                        <td>$273.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">The Coca-Cola Company</td>
+                        <td>KO</td>
+                        <td>$61.37</td>
+                        <td>$265.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Oracle Corporation</td>
+                        <td>ORCL</td>
+                        <td>$118.36</td>
+                        <td>$319.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Merck & Co., Inc.</td>
+                        <td>MRK</td>
+                        <td>$109.12</td>
+                        <td>$276.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Broadcom Inc.</td>
+                        <td>AVGO</td>
+                        <td>$861.80</td>
+                        <td>$356.00B</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Mastercard Incorporated</td>
+                        <td>MA</td>
+                        <td>$421.44</td>
+                        <td>$396.00B</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
      </div>
+  </div>
+  <div class="fixed end-6 bottom-6">
+     <!-- Button modal -->
+     <button type="button" data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="flex items-center justify-center text-white bg-design-primary rounded-lg w-14 h-14 hover:bg-green-200 focus:ring-4 focus:ring-green-200 focus:outline-none">
+         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+         </svg>
+         <span class="sr-only">Request Pickup</span>
+     </button>
+ </div>
+ @include("nasabah.pickUpRequest")
+
+  {{-- Script Datatables --}}
+  <script>
+    if (document.getElementById("table") && typeof simpleDatatables.DataTable !== 'undefined') {
+        const dataTable = new simpleDatatables.DataTable("#table", {
+            searchable: true,
+            sortable: true
+        });
+    }
+ </script>
 </x-layout-admin>
