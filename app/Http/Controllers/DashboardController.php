@@ -39,10 +39,10 @@ class DashboardController extends Controller
 
     public function transferCancel($id)
     {
-        $pickup = Withdraw::where('user_id', auth()->id())->findOrFail($id);
+        $transfer = Withdraw::where('user_id', auth()->id())->findOrFail($id);
 
-        $pickup->status_id = 7;
-        $pickup->save();
+        $transfer->status_id = 7;
+        $transfer->save();
 
         return redirect()->route('nasabah.dashboard')->with('success', 'Permintaan transfer telah dibatalkan.');
     }

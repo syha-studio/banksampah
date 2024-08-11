@@ -47,6 +47,21 @@
          </div>
       @enderror
 
+      {{-- Alert Error Upload File --}}
+      @error('file_name')
+         <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+            <div class="ms-3 text-sm font-medium">
+               {{ $message }}
+            </div>
+            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+               <span class="sr-only">Close</span>
+               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+               </svg>
+            </button>
+         </div>
+      @enderror
+
       <div class="grid grid-cols-8 gap-4 mb-4">
 
          {{-- Profile Card --}}
@@ -96,13 +111,19 @@
          </div>
          <div class="flow-root">
 
-            {{-- List Permintaan --}}
+            {{-- List Permintaan Setoran--}}
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                @if ($pickups->isNotEmpty())
                   @foreach ($pickups as $pickup)
                      <li class="py-3 sm:py-4">
                         <div class="flex items-center">
                            <div class="flex-1 min-w-0 ms-4">
+                                 <p class="text-md font-medium text-gray-900 truncate dark:text-white">
+                                    ID {{ $pickup->user_id }} - {{ $pickup->user->name }}
+                                 </p>
+                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    Alamat : {{ $pickup->user->address }} | {{ $pickup->user->whatsapp }}
+                                 </p>
                                  <div class="flex items-center justify-start">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                        @if ($pickup->status->id == 1)
@@ -183,40 +204,71 @@
             </h5>
          </div>
          <div class="flow-root">
+
+            {{-- List Permintaan Penarikan --}}
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-               <li class="py-3 sm:py-4">
-                  <div class="flex items-center">
-                     @if ($withdrawActives->isNotEmpty())
-                        @foreach ($withdrawActives as $withdrawActive)
-                         <div class="flex-1 min-w-0 ms-4">
-                              <div class="flex items-center justify-start">
-                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Rp {{ $withdrawActive->total }}
+               @if ($withdrawActives->isNotEmpty())
+                  @foreach ($withdrawActives as $withdrawActive)
+                     <li class="py-3 sm:py-4">
+                        <div class="flex items-center">
+                           <div class="flex-1 min-w-0 ms-4">
+                                 <p class="text-md font-medium text-gray-900 truncate dark:text-white">
+                                   ID {{ $withdrawActive->user_id }} - {{ $withdrawActive->user->name }}
                                  </p>
-                                 @if ($withdrawActive->status->id == 1)
+                                 <div class="flex items-center justify-start">
+                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                       Rp {{ number_format($withdrawActive->total, 0, ',', '.') }} | {{ $withdrawActive->method->methodCategory->name }} - {{ $withdrawActive->method->name }}
+                                    </p>
                                     <span class="ml-2">
-                                       <form action="{{ route('transfer.cancel', $withdrawActive->id) }}" method="POST" class="inline">
+                                       <form action="{{ route('transfer.cancel2', $withdrawActive->id) }}" method="POST" class="inline">
                                              @csrf
                                              <button type="submit" class="text-red-500">Batal</button>
                                        </form>
                                     </span>
-                                 @endif
-                              </div>
-                              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                 Terakhir diupdate {{ $withdrawActive->updated_at }}
-                              </p>
-                         </div>
-                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                           {{ $withdrawActive->status->name }}
-                         </div>
-                        @endforeach
-                     @else
-                         <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
-                             Tidak ada Permintaan Aktif
-                         </div>
-                     @endif
-                 </div>
-               </li>
+                                 </div>
+                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    Terakhir diupdate {{ $withdrawActive->updated_at }}
+                                 </p>
+                           </div>
+                           <div class="px-4 inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              {{ $withdrawActive->status->name }}
+                           </div>
+                           <div class="px-4 inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              
+                              {{-- Jika Status Menunggu Konfirmasi --}}
+                              @if ($withdrawActive->status->id == 1)
+                                 <div class="flex flex-col">
+                                    <div class="inline-flex relative max-w-sm">
+                                       <a data-modal-target="detail-withdraw{{ $withdrawActive->id }}" data-modal-toggle="detail-withdraw{{ $withdrawActive->id }}" class="font-medium text-design-primary hover:underline cursor-pointer">Lihat Detail</a>
+                                    </div>
+                                    <form action="{{ route('transfer.update', $withdrawActive->id) }}" method="POST" class="inline">
+                                       @csrf
+                                       <button type="submit" class="font-medium text-design-primary hover:underline cursor-pointer">Proses Sekarang</button>
+                                    </form>
+                                 </div>
+
+                              {{-- Jika Status Sedang Diproses --}}
+                              @else
+                                 <form action="{{ route('transfer.update', $withdrawActive->id) }}" method="POST" enctype="multipart/form-data" class="inline">
+                                    @csrf
+                                    <div class="flex justify-center items-center gap-4">
+                                       <input class="block w-3/4 text-xs text-design-secondary border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="file_name" name="file_name" accept="image/*" type="file" required>
+                                       <button type="submit" class="font-medium text-design-primary hover:underline cursor-pointer">Upload</button>
+                                    </div>
+                                 </form>
+                              @endif
+
+                           </div>
+                        </div>
+                     </li>
+                  @endforeach
+               @else
+                  <li>
+                     <div class="flex justify-center items-center h-full w-full text-center text-base font-semibold text-gray-900 dark:text-white">
+                        Tidak ada Permintaan Aktif
+                    </div>
+                  </li>  
+               @endif
             </ul>
          </div>
       </div>
@@ -303,6 +355,12 @@
    @foreach ($pickups as $pickup)
       @if ($pickup->status->id == 3)
          @include('admin.pickupDetailForm')
+      @endif
+   @endforeach
+
+   @foreach ($withdrawActives as $withdrawActive)
+      @if ($withdrawActive->status->id == 1)
+         @include('admin.detailWithdraw')
       @endif
    @endforeach
 

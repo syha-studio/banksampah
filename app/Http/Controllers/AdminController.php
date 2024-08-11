@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Waste;
 use App\Models\Pickup;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Withdraw;
 use App\Models\WastePrice;
 use App\Models\PickupDetail;
@@ -33,11 +34,30 @@ class AdminController extends Controller
             ->orderby('pickups.status_id')
             ->orderby('pickups.pickup_date')
             ->get();
-        $withdrawActive = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [1, 2, 4])->get();
-        $pickupHistory = Pickup::where('user_id',auth()->user()->id)->whereIn('status_id', [5, 7, 8])->limit(3)->get();
-        $withdraw = Withdraw::where('user_id',auth()->user()->id)->whereIn('status_id', [6, 7, 9])->limit(3)->get();
-        // return auth()->user()->role_id;
-        // return $wastesOptions;
+        $withdrawActive = Withdraw::select('withdraws.*')
+            ->join('users', 'withdraws.user_id', '=', 'users.id')
+            ->where('users.branch_id', auth()->user()->branch_id)
+            ->where('users.role_id', 1)
+            ->whereIn('status_id', [1, 4])
+            ->orderby('status_id')
+            ->get();
+        $pickupHistory = Pickup::select('pickups.*')
+            ->join('users', 'pickups.user_id', '=', 'users.id')
+            ->where('users.branch_id', auth()->user()->branch_id)
+            ->where('users.role_id', 1)
+            ->whereIn('pickups.status_id', [5, 7, 8])
+            ->orderby('pickups.updated_at', 'desc')
+            ->limit(5)
+            ->get();
+        $withdraw = Withdraw::select('withdraws.*')
+            ->join('users', 'withdraws.user_id', '=', 'users.id')
+            ->where('users.branch_id', auth()->user()->branch_id)
+            ->where('users.role_id', 1)
+            ->whereIn('status_id', [6, 7, 9])
+            ->orderby('withdraws.updated_at', 'desc')
+            ->limit(5)
+            ->get();
+        // return $withdrawActive;
 
         $hasPickupToday = false;
 
@@ -139,5 +159,41 @@ class AdminController extends Controller
             // Handle any errors during insertion
             return redirect()->back()->with('error', 'Failed to save pickup details.');
         }
+    }
+
+    public function transferCancel($id)
+    {
+        $withdraw = Withdraw::findOrFail($id);
+
+        $withdraw->status_id = 7;
+        $withdraw->save();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Permintaan transfer telah dibatalkan.');
+    }
+
+    public function transferNow(Request $request, $id)
+    {
+        $withdraw = Withdraw::findOrFail($id);
+
+        // Validasi file upload
+        $request->validate([
+            'file_name' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Simpan file ke storage
+        $path = $request->file('file_name')->store('img/receipt', 'public');
+    
+        // Simpan nama file ke tabel images
+        $image = Image::create([
+            'file_name' => $path,
+        ]);
+    
+        // Update withdraw dengan image_id dan ubah status_id menjadi 6
+        $withdraw->update([
+            'image_id' => $image->id,
+            'status_id' => 6,
+        ]);
+    
+        return redirect()->back()->with('success', 'File berhasil diupload dan status diperbarui.');
     }
 }
