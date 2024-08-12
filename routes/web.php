@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\PickupController;
+use App\Http\Controllers\NasabahController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WastePriceController;
-use App\Http\Controllers\AdminController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Public
@@ -76,6 +78,13 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/transfer/{id}', [AdminController::class, 'transferNow'])->name('transfer.update');
     Route::post('/transfer/cancel/{id}', [AdminController::class, 'transferCancel'])->name('transfer.cancel2');
     
+    // Waste Pricing
+    Route::get('/admin/pricing', [PricingController::class, 'index'])->name('admin.pricing');
+
+    // Nasabah
+    Route::get('/admin/nasabah', [NasabahController::class, 'index'])->name('admin.nasabah');
+
+
     Route::get('/admin/financial-report', function () {
         return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);
     });
@@ -88,19 +97,11 @@ Route::middleware(['admin'])->group(function () {
         return view('admin.logSetoranSampah', ['title' => 'Deposit Log - Admin Banks BIMA']);
     });
     
-    Route::get('/admin/nasabah', function () {
-        return view('admin.nasabahManagement', ['title' => 'Nasabah Management - Admin Banks BIMA']);
-    });
-    
     Route::get('/admin/pickup', function () {
         return view('admin.pickUpManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
     });
 
     Route::get('/admin/saldo', function () {
         return view('admin.saldoManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
-    });
-    
-    Route::get('/admin/pricing', function () {
-        return view('admin.priceManagement', ['title' => 'Price Management - Admin Banks BIMA']);
     });
 });
