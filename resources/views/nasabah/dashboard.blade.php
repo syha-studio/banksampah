@@ -71,7 +71,7 @@
                                  </p>
                                  @if ($pickup->status->id == 1)
                                     <span class="ml-2">
-                                       <form action="{{ route('pickup.cancel', $pickup->id) }}" method="POST" class="inline">
+                                       <form action="{{ route('pickup.cancel1', $pickup->id) }}" method="POST" class="inline">
                                              @csrf
                                              <button type="submit" class="text-red-500">Batal</button>
                                        </form>

@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['nasabah'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('nasabah.dashboard');
-    Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel');
+    Route::post('/pickup/cancel/{id}', [DashboardController::class, 'cancel'])->name('pickup.cancel1');
     Route::post('/transfer/cancel/{id}', [DashboardController::class, 'transferCancel'])->name('transfer.cancel');
     Route::post('/pickup-request', [DashboardController::class, 'create'])->name('pickup.request');
     Route::post('/profile', [DashboardController::class, 'update'])->name('profile.update');
