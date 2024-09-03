@@ -16,14 +16,8 @@ class BranchSeeder extends Seeder
         
         Branch::create(
             [
-            'name' => 'Dwi Jaya Rungkut',
-            'district_id' => 14
-            ]
-        );
-        Branch::create(
-            [
-            'name' => 'Sejahtera Gubeng',
-            'district_id' => 24
+            'name' => 'Bintang Mangrove',
+            'district_id' => 23
             ]
         );
     }

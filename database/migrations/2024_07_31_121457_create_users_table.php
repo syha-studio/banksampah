@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('id_number')->unique();
-            $table->string('name');
-            $table->string('whatsapp');
-            $table->string('address');
+            $table->string('name')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('address')->nullable();
             $table->foreignId('district_id')->constrained();
             $table->foreignId('branch_id')->constrained()->default(1);
             $table->bigInteger('saldo')->nullable();
