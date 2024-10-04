@@ -4,8 +4,8 @@
       <div class="flex items-center justify-start rtl:justify-end">
         {{ $slot }}
         <a href="/" class="flex ms-2 md:me-24">
-          <img src="/img/banksbimalogo.png" class="h-10 me-3" alt="BANKS BIMA" />
-          <span class="self-center pt-2 text-xl font-semibold sm:text-2xl whitespace-nowrap text-design-white">BANKS BIMA</span>
+          <img src="/img/banksbimalogo.png" class="h-10 me-3" alt="BIMAPRAYA" />
+          <span class="self-center pt-2 text-xl font-semibold sm:text-2xl whitespace-nowrap text-design-white">BIMAPRAYA</span>
         </a>
       </div>
       <div class="flex items-center">

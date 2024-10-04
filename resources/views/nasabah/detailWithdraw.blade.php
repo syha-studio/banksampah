@@ -15,7 +15,7 @@
             </div>
             <!-- Modal body -->
             <a data-modal-target="view-image{{ $withdraw->id }}" data-modal-toggle="view-image{{ $withdraw->id }}" class="hover:opacity-80 cursor-pointer">
-                <img class="h-24 w-full rounded-lg object-cover" src="/img/recycle.webp" alt="image description">
+                <img class="h-24 w-full rounded-lg object-cover" src="{{ asset('storage/'. $withdraw->image->file_name) }}" alt="image description">
             </a>
             <div id="view-image{{ $withdraw->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4 w-full max-w-xl h-screen md:h-auto">
@@ -32,7 +32,7 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <img class="h-full rounded-lg object-=fit" src="/img/recycle.webp" alt="image description">
+                        <img class="h-full rounded-lg object-=fit" src="{{ asset('storage/'. $withdraw->image->file_name) }}" alt="image description">
                     </div>
                 </div>
              </div>
