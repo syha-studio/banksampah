@@ -1,12 +1,12 @@
 <x-layout>
   <x-slot:title>{{ $title }}</x-slot:title>
-  <section class="bg-design-white dark:bg-gray-900">
-    <div class="pt-32 mx-auto max-w-screen-xl text-center lg:pt-32">
+  <section class="bg-design-white dark:bg-gray-900 px-4">
+    <div class="pt-28 sm:pt-32 mx-auto max-w-screen-xl text-center">
       <div class="flex justify-center py-6">
-        <img src="/img/banksbimalogo.png" alt="BIMAPRAYA" class="h-32">
+        <img src="/img/banksbimalogo.png" alt="BIMAPRAYA" class=" h-20 sm:h-32">
       </div>
-      <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-design-secondary md:text-5xl lg:text-6xl dark:text-white">SELAMAT DATANG DI BIMAPRAYA</h1>
-      <p class="mb-8 text-lg font-semibold text-design-secondary lg:text-xl sm:px-16 dark:text-gray-400">Ubah sampah jadi uang! Kumpulkan sampah terpilah Anda dan bawa ke bank sampah terdekat.</p>
+      <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-design-secondary md:text-5xl lg:text-6xl">SELAMAT DATANG DI BIMAPRAYA</h1>
+      <p class="mb-8 text-md font-semibold text-design-secondary lg:text-xl sm:px-16 dark:text-gray-400">Ubah sampah jadi uang! Kumpulkan sampah terpilah Anda dan bawa ke bank sampah terdekat.</p>
       <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4 relative z-10">
         <a href="/how-to-join-banksbima" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-design-secondary rounded-lg bg-design-primary hover:bg-green-200 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 relative z-20">
           Setor Sampah
@@ -15,7 +15,7 @@
           </svg>
         </a>
       </div>
-      <div class="-mt-20 relative z-0">
+      <div class="mt-5 sm:-mt-20 relative z-0">
         <img src="/svg/vector1.svg" alt="Vector 1" class="h-full">
       </div>      
   </section>
@@ -44,7 +44,7 @@
         <p class="mb-4">Sistem penarikan tunai yang kami tawarkan memberikan fleksibilitas dan keuntungan nyata bagi Anda, sehingga semakin banyak sampah yang Anda kirimkan, semakin besar pula penghasilan tambahan yang Anda peroleh.</p>
         <h4 class="mb-4 text-2xl tracking-tight font-bold text-design-secondary dark:text-white">Seminar Daur Ulang Gratis</h4>
         <p class="mb-7">Sebagai anggota bank sampah kami, Anda berhak mengikuti seminar - seminar terkait pengelolaan sampah secara gratis.</p>
-        <img src="/svg/vector4.svg" alt="Vector 3">
+        <img src="/svg/vector4.svg" alt="Vector 3" class="hidden sm:block">
       </div>
       <div>
         <img src="/svg/vector3.svg" alt="Vector 3">

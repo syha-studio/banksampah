@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <section class="bg-design-white dark:bg-design-secondary pb-auto pt-24 h-screen items-center">
+    <section class="bg-design-white dark:bg-design-secondary pb-auto pt-24 h-full sm:h-screen items-center">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
             <div class="mb-6 px-6 py-8 w-full flex items-center justify-center bg-design-secondary rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <a href="#" class="flex items-center my-5 text-2xl font-semibold text-design-white dark:text-white">
@@ -26,25 +26,4 @@
             </div>
         </div>
     </section>
-    <script>
-        document.getElementById('city').addEventListener('change', function() {
-            var cityId = this.value;
-            var districtSelect = document.getElementById('district');
-            districtSelect.innerHTML = '<option value="">Pilih Kecamatan</option>'; // Reset options
-
-            if (cityId) {
-                fetch(`/api/districts/${cityId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(district => {
-                            var option = document.createElement('option');
-                            option.value = district.id;
-                            option.text = district.name;
-                            districtSelect.add(option);
-                        });
-                    })
-                    .catch(error => console.error('Error fetching districts:', error));
-            }
-        });
-    </script>
   </x-layout>

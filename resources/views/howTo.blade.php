@@ -34,9 +34,9 @@
                 <p class= "text-design-secondary"><span class="font-bold text-xl">4. Hasil Timbang diinput di tempat:</span><br>Setelah ditimbang, hasil timbangan akan langsung diinput oleh petugas di tempat.</p>
                 <p class= "text-design-secondary"><span class="font-bold text-xl">5. Cek Detail Hasil Timbang dan Saldo:</span><br>Periksa detail hasil timbangan dan saldo yang didapatkan melalui website resmi BIMAPRAYA.</p>
                 <p class= "text-design-secondary"><span class="font-bold text-xl">6. Tarik/Belanjakan Saldo:</span><br>Gunakan saldo yang didapatkan untuk menarik uang tunai atau belanja kebutuhan melalui platform kami.</p>
-                <img src="/svg/vector9.svg" alt="vector 9" class="mt-8">
+                <img src="/svg/vector9.svg" alt="vector 9" class="mt-8 block">
             </div>
-            <div class="grid col-span-2 gap-4 mt-8">
+            <div class="lg:grid col-span-2 gap-4 mt-8 hidden">
                 <img src="/svg/vector8.svg" alt="vector 8">
             </div>
         </div>
