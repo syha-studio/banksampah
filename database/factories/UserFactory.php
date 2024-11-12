@@ -29,13 +29,12 @@ class UserFactory extends Factory
 
         return [
             'role_id' => $roleId,
-            'email' => $this->faker->unique()->safeEmail,
+            'username' => $this->faker->unique()->userName,
             'password' => bcrypt('password'), // Default password for all users
-            'id_number' => $this->faker->unique()->numerify('ID########'),
+            'email' => $this->faker->unique()->safeEmail,
             'name' => $this->faker->name,
             'whatsapp' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
-            'district_id' => District::inRandomOrder()->first()->id,
             'branch_id' => Branch::inRandomOrder()->first()->id,
             'saldo' => $this->faker->numberBetween(1000000, 50000000),
         ];

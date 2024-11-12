@@ -21,8 +21,8 @@ class PickupDetailFactory extends Factory
         $total = $qty * $wastePrice->price;
 
         return [
-            'waste_price_id' => $wastePrice->id,
             'pickup_id' => Pickup::factory(),
+            'wasteprice' => $wastePrice->price,
             'qty' => $qty,
             'total' => $total,
         ];
