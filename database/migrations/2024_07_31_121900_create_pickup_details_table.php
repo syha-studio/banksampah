@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pickup_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('waste_price_id')->constrained();
             $table->foreignId('pickup_id')->constrained();
+            $table->integer('wasteprice');
             $table->integer('qty');
             $table->bigInteger('total');
             $table->timestamps();
