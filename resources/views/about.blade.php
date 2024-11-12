@@ -70,7 +70,7 @@
                 <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Kenali lebih jauh orang - orang di
                     balik Bank Sampah Bintang Mangrove</p>
             </div>
-            <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3">
                 <div class="text-center text-gray-500 dark:text-gray-400">
                     <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="/img/avatar-default.png" alt="Avatar">
                     <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

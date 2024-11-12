@@ -9,21 +9,13 @@ use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\WastePriceController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\MainController;
 
 // Public
-Route::get('/', function () {
-    return view('home', ['title' => 'Banks BIMA']);
-});
-Route::get('/about', function () {
-    return view('about', ['title' => 'About - Banks BIMA']);
-});
-Route::get('/how-to-join-banksbima', function () {
-    return view('howTo', ['title' => 'How to Join - Banks BIMA']);
-});
-Route::get('/harga-sampah', [WastePriceController::class, 'index'])->name('wasteprice.index');
-
+Route::get('/', [MainController::class, 'home'])->name('home');
+Route::get('/about', [MainController::class, 'about'])->name('about');
+Route::get('/how-to-join-banksbima', [MainController::class, 'howTo'])->name('howTo');
+Route::get('/harga-sampah', [MainController::class, 'wastePrice'])->name('wastePrice');
 
 // Guest Only
 Route::middleware(['guest'])->group(function () {
@@ -36,7 +28,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
 });
-
 
 // Auth
 Route::middleware(['auth'])->group(function () {
@@ -63,7 +54,7 @@ Route::middleware(['nasabah'])->group(function () {
 
     // Shop
     Route::get('/shop', function () {
-        return view('nasabah.shop', ['title' => 'Shop - Banks BIMA']);
+        return view('nasabah.shop', ['title' => 'Shop']);
     });
 });
 
@@ -71,13 +62,13 @@ Route::middleware(['nasabah'])->group(function () {
 Route::middleware(['admin'])->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::post('/pickup/cancel/{id}', [AdminController::class, 'cancel'])->name('pickup.cancel2');
+    Route::post('/admin/pickup/cancel/{id}', [AdminController::class, 'cancel'])->name('pickup.cancel2');
     Route::post('/pickup/{id}/update', [AdminController::class, 'update'])->name('pickup.update');
     Route::post('/pickup/{id}/take', [AdminController::class, 'take'])->name('pickup.take');
     Route::post('/pick/{id}', [AdminController::class, 'storePickupDetails'])->name('pick.store');
     Route::post('/transfer/{id}', [AdminController::class, 'transferNow'])->name('transfer.update');
     Route::post('/transfer/cancel/{id}', [AdminController::class, 'transferCancel'])->name('transfer.cancel2');
-    
+
     // Waste Pricing
     Route::get('/admin/pricing', [PricingController::class, 'index'])->name('admin.pricing');
 
@@ -88,15 +79,15 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/financial-report', function () {
         return view('admin.laporanKeuangan', ['title' => 'Finance Report - Admin Banks BIMA']);
     });
-    
+
     Route::get('/admin/waste-report', function () {
         return view('admin.laporanSampah', ['title' => 'Waste Report - Admin Banks BIMA']);
     });
-    
+
     Route::get('/admin/deposit-log', function () {
         return view('admin.logSetoranSampah', ['title' => 'Deposit Log - Admin Banks BIMA']);
     });
-    
+
     Route::get('/admin/pickup', function () {
         return view('admin.pickUpManagement', ['title' => 'Pick Up Management - Admin Banks BIMA']);
     });
