@@ -19,17 +19,27 @@
                             <h4 class="font-semibold ">Data Diri</h4>
                         </div>
                         <input type="hidden" name="role_id" id="role_id" value="1">
-                        <input type="hidden" name="branch_id" id="branch_id" value="1">
                         <input type="hidden" name="saldo" id="saldo" value="0">
-                        <x-form-input type="email" name="email" id="email" label="Email" placeholder="Masukkan Email"/>
-                        <x-form-input type="text" name="id_number" id="id_number" label="Nomor KTP" placeholder="Masukkan Nomor KTP"/>
+                        <x-form-input type="text" name="username" id="username" label="Username" placeholder="Masukkan Username"/>
                         <x-form-input type="text" name="name" id="name" label="Nama Lengkap" placeholder="Masukkan Nama Lengkap"/>
+                        <x-form-input type="email" name="email" id="email" label="Email" placeholder="Masukkan Email"/>
                         <x-form-input type="text" name="whatsapp" id="whatsapp" label="Nomor WhatsApp" placeholder="Masukkan Nomor WhatsApp"/>
+                        <x-form-input type="text" name="address" id="address" label="Alamat" placeholder="Masukkan Jalan, No Rumah, Desa, Kecamatan"/>
                         <div class="pt-6 text-center">
-                            <h4 class="font-semibold ">Alamat Nasabah</h4>
+                            <h4 class="font-semibold ">Pilih Cabang Bank Sampah</h4>
                         </div>
-                        <x-form-select name="district_id" id="district_id" label="Kecamatan" placeholder="Pilih Kecamatan" :options="$districts"/>
-                        <x-form-input type="text" name="address" id="address" label="Alamat" placeholder="Masukkan Jalan, No Rumah, Desa"/>
+                        <div>
+                            <label for="branch_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kantor Cabang</label>
+                            <select id="branch_id" name="branch_id" class="@error('branch_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-design-primary focus:border-design-primary block w-full p-2.5">
+                                <option value="">Pilih Cabang</option>
+                                @foreach ($branches as $option)
+                                    <option value="{{ $option->id }}">{{ $option->name }}, {{ $option->district->name }}</option>
+                                @endforeach
+                                @error('branch_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </select>
+                        </div>
                         <div class="pt-6 text-center">
                             <h4 class="font-semibold ">Buat Password</h4>
                         </div>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
 use App\Models\City;
 use App\Models\User;
-use App\Models\District;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,14 +13,16 @@ class RegisterController extends Controller
     public function index(Request $request)
     {
         $cityId = $request->input('kota');
-        $DistrictOptions = [];
+        $BranchOptions = [];
         if ($cityId) {
-            $DistrictOptions = District::where('city_id', $cityId)->get();
+            $BranchOptions = Branch::whereHas('district', function ($query) use ($cityId) {
+                $query->where('city_id', $cityId);
+            })->get();
         }
 
         return view('register',[
             'title' => 'Register',
-            'districts' => $DistrictOptions
+            'branches' => $BranchOptions
         ]);
     }
 
@@ -36,8 +38,10 @@ class RegisterController extends Controller
 
     public function getDistrictsByCity($cityId)
     {
-        $districts = District::where('city_id', $cityId)->get();
-        return response()->json($districts);
+        $branches = Branch::whereHas('district', function ($query) use ($cityId) {
+            $query->where('city_id', $cityId);
+        })->get();
+        return response()->json($branches);
     }
 
     public function store(Request $request)
@@ -45,10 +49,9 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'role_id' => 'required',
             'email' => 'required|email:dns|unique:users|max:100',
-            'id_number' => 'required|unique:users|digits:16|numeric',
+            'username' => 'required|unique:users',
             'name' => 'required|max:255',
             'whatsapp' => 'required|numeric',
-            'district_id' => 'required',
             'address' => 'required|max:255',
             'password' => 'required|min:5|max:255|confirmed',
             'password_confirmation' => 'required|same:password',
@@ -59,10 +62,9 @@ class RegisterController extends Controller
         User::create([
             'role_id' => $validatedData['role_id'],
             'email' => $validatedData['email'],
-            'id_number' => $validatedData['id_number'],
+            'username' => $validatedData['username'],
             'name' => $validatedData['name'],
             'whatsapp' => $validatedData['whatsapp'],
-            'district_id' => $validatedData['district_id'],
             'address' => $validatedData['address'],
             'password' => Hash::make($validatedData['password']),
             'branch_id' => $validatedData['branch_id'],

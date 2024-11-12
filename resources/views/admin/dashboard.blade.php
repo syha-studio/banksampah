@@ -70,7 +70,7 @@
                <div class="flex flex-row items-center">
                   <img class="w-28 h-28 mx-4 shadow-lg rounded-full" src="/img/avatar-bank.png" alt="Foto Avatar"/>
                   <div>
-                     <h6 class="mb-1 text-base font-medium text-gray-900 dark:text-white">{{ auth()->user()->district->name}}</h6>
+                     <h6 class="mb-1 text-base font-medium text-gray-900 dark:text-white">{{ auth()->user()->branch->district->name}}</h6>
                      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">BS {{ auth()->user()->name }}</h5>
                      <p class="text-sm text-gray-500 dark:text-gray-400">{{ auth()->user()->id_number }}</p>
                      <p class="text-sm text-gray-500 dark:text-gray-400">{{ auth()->user()->address }}</p>

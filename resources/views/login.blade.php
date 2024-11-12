@@ -44,7 +44,7 @@
                     </h1>
                     <form class="space-y-4 md:space-y-6" action="/login" method="post">
                         @csrf
-                        <x-form-input type="email" name="email" id="email" label="Email" placeholder="Masukkan Email" autofocus/>
+                        <x-form-input type="text" name="username" id="username" label="Username" placeholder="Masukkan username" autofocus/>
                         <x-form-input type="password" name="password" id="password" label="Password" placeholder="••••••••"/>
                         {{-- <div class="flex items-center justify-between">
                             <div class="flex items-start">

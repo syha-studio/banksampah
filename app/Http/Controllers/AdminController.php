@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Waste;
 use App\Models\Pickup;
 use App\Models\Category;
 use App\Models\Image;
@@ -12,7 +11,6 @@ use App\Models\Withdraw;
 use App\Models\WastePrice;
 use App\Models\PickupDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {

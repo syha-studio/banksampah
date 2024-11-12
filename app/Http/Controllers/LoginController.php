@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function authenticate(Request $request): RedirectResponse
      {
         $credentials = $request->validate([
-            'email' => 'required|email:dns',
+            'username' => 'required',
             'password' => 'required',
         ]);
 
@@ -33,7 +33,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
  
-        return back()->with('loginError','Email atau Password Salah!');
+        return back()->with('loginError','Username atau Password Salah!');
     }
     
     public function logout(Request $request): RedirectResponse
