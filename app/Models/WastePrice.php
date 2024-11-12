@@ -13,11 +13,6 @@ class WastePrice extends Model
         'id'
     ];
 
-    public function pickupDetail()
-    {
-        return $this->hasMany(pickupDetail::class);
-    }
-
     public function branch()
     {
         return $this->belongsTo(Branch::class);

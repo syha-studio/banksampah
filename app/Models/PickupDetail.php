@@ -13,11 +13,6 @@ class PickupDetail extends Model
         'id'
     ];
 
-    public function wastePrice()
-    {
-        return $this->belongsTo(WastePrice::class);
-    }
-
     public function pickup()
     {
         return $this->belongsTo(Pickup::class);

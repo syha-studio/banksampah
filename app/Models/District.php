@@ -13,11 +13,6 @@ class District extends Model
         'id'
     ];
 
-    public function user()
-    {
-        return $this->hasMany(User::class);
-    }
-
     public function branch()
     {
         return $this->hasMany(Branch::class);

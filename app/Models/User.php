@@ -25,11 +25,6 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-
-    public function district()
-    {
-        return $this->belongsTo(District::class);
-    }
     
     public function branch()
     {
